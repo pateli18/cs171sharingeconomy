@@ -1,2 +1,2 @@
-web: gunicorn app:SharingEconomy
+web: gunicorn app:runserver
 init: python db_create.py
