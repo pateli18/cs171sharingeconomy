@@ -1,0 +1,12 @@
+{
+  "data":
+          [
+            {"name": "Logan Airport", "index": 3003},
+            {"name": "South Station", "index": 1521},
+            {"name": "MIT", "index":313},
+            {"name": "Tufts", "index":490},
+            {"name": "Fenway Park", "index":541},
+            {"name": "Lexington", "index":6437},
+            {"name": "Ashmont", "index":5061}
+          ]
+}

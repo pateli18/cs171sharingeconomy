@@ -1,0 +1,270 @@
+
+/* YOUR CSS STYLES */
+
+body {
+    font-family: Arial;
+}
+
+.section-header {
+    background-color: #09091a;
+    color: white;
+    font-size: 40px;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    padding-right: 15px;
+    display: inline-block;
+}
+
+.section-subheader {
+    font-size: 18px;
+    color: #09091a;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-top: solid 1px #c0c0c8;
+    border-bottom: solid 1px #c0c0c8;
+}
+
+.text-bloc {
+    color: black;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.metric-bloc {
+    text-align: center;
+    border-left: solid 1px grey;
+    height: 200px;
+    margin-bottom: 40px;
+}
+
+.metric-bloc h2 {
+    color: #8b0000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.description-bloc {
+    color: grey;
+    font-size: 20px;
+}
+
+.control-header {
+    font-weight: bold;
+}
+
+.axis-label {
+    fill: grey;
+    font-size: 11px;
+    text-transform: capitalize;
+}
+
+.poi-label {
+    fill: black;
+    font-size: 11px;
+}
+
+.relative-value-legend-label {
+    fill: black;
+    font-size: 11px;
+}
+
+.metric-count {
+    text-align: center;
+    border: solid 1px grey;
+    margin-top: 10px;
+}
+
+.footnote {
+    color: grey;
+    font-size: 8px;
+}
+
+select {
+    margin-bottom: 30px;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: black;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.d3-tip-timeline {
+    line-height: 1;
+    padding: 12px;
+    background: black;
+    color: #fff;
+    border-radius: 2px;
+    width: 200px;
+    font-size: 9px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after, .d3-tip-timeline:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: black;
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after, .d3-tip-timeline.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+.legendSize circle {
+    fill: white;
+    stroke: black;
+}
+
+.control-box {
+    border: solid 3px #8b0000;
+}
+
+.legendTitle {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#case-count {
+    height: 50px;
+}
+
+#scatter-plot-controls {
+    margin-left: 5px;
+}
+
+.leaflet-zoom-animated circle{
+    pointer-events: auto;
+}
+
+.d3-tip td {
+    font-size: 10px;
+    padding: 2px;
+}
+
+.map-circle {
+    opacity: .2;
+}
+
+.event-circle {
+    opacity: .8;
+    stroke: black;
+}
+
+.scatter-point:hover {
+    stroke: black;
+    stroke-width: 5px;
+}
+
+.legend-circle:hover {
+    fill: #c0c0c8;
+}
+
+.interaction-header {
+    font-size: 14px;
+    background-color: #09091a;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.form-control {
+    width: 200px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.info-description {
+    font-size: 14px;
+    color: black;
+}
+
+#surge-slider {
+    width: 200px;
+    display: inline-block;
+    margin-left: 10px;
+    background-color: #c0c0c8;
+}
+
+#surge-slider span {
+    background-color: #09091a;
+    border: solid 1px #c0c0c8;
+}
+
+.title-banner {
+    background-image: url("../img/title-banner.jpg");
+    background-size: contain;
+    height: 200px;
+}
+
+.story-text {
+    font-size: 30px;
+    padding-top: 100px;
+    color: #09091a;
+}
+
+.story-animation i {
+    font-size: 100px;
+    position: absolute;
+}
+
+.icon-container {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    outline: 1px solid transparent;
+    left: inherit;
+    color: #09091a;
+}
+
+.img-icon {
+    height: 100px;
+    width: 100px;
+}
+
+.vote-icon {
+    text-align: center;
+    font-size: 100px;
+    color: #09091a;
+}
+
+.vote-label {
+    text-align: center;
+    font-size: 20px;
+    color: #09091a;
+}
+
+.vote-label span {
+    color: #c0c0c8;
+    font-size: 15px;
+}
+
+.btn {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+/* relative value map */
+
+/***waterfall chart***/
+.rect--negative {
+    fill: brown;
+}
+
+/*.rect--positive {
+    fill: #508622;
+}*/
