@@ -36,16 +36,9 @@ BarChart.prototype.initVis = function() {
     vis.xAxis = d3.axisBottom()
         .scale(vis.xScale);
 
-    vis.yAxis = d3.axisLeft()
-        .scale(vis.yScale)
-        .tickFormat(d3.format('.0%'));
-
     vis.svg.append("g")
         .attr("class", "x-axis axis")
         .attr("transform", "translate(0," + vis.height + ")");
-
-    vis.svg.append("g")
-        .attr("class", "y-axis axis");
 
     vis.wrangleData();
 };
@@ -96,6 +89,26 @@ BarChart.prototype.updateData = function() {
 
     bars.exit().remove();
 
+    var barText = vis.svg.selectAll('.vote-bar-text-' + vis.voteGroup)
+        .data(vis.displayData);
+
+    barText.enter()
+        .append('text')
+        .attr('class', 'vote-bar-text-' + vis.voteGroup)
+        .attr('fill', '#09091a')
+        .style('font-weight', 'bold')
+        .merge(barText)
+        .transition()
+        .duration(1000)
+        .attr('x', function(d) {
+            return vis.xScale(d.name) + 32;
+        })
+        .attr('y', function(d) {
+            return vis.yScale(d.value) - 5;
+        })
+        .text(function(d) {
+            return d3.format('.0%')(d.value);
+        });
+
     vis.svg.select(".x-axis").call(vis.xAxis);
-    vis.svg.select(".y-axis").call(vis.yAxis);
 };

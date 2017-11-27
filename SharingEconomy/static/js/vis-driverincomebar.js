@@ -104,15 +104,15 @@ IncomeChart.prototype.updateChart = function() {
             }
             var contributionColor;
             if (contribution < 0) {
-                contributionColor = "#a50026";
+                contributionColor = '#d9534f';
             } else if (contribution > 0) {
-                contributionColor = "#006837";
+                contributionColor = '#5cb85c';
             } else {
                 contributionColor = "grey";
             }
             return '<div style="text-align: center; color:white; font-size:16px;"><strong>' + d.key + '</strong></div>' +
             '<span style="font-size:12px;">Contribution: <span style="color:' + contributionColor + ';">' + d3.format('($,.0f')(contribution) + '</span></span><br>' +
-            '<span style="font-size:12px;">Net: <span style="color:#006837;">' + d3.format('$,.0f')(net) + '</span></span>';
+            '<span style="font-size:12px;">Net: <span style="color:#5cb85c;">' + d3.format('$,.0f')(net) + '</span></span>';
         });
 
     vis.svg.call(vis.tooltip);
@@ -134,9 +134,9 @@ IncomeChart.prototype.updateChart = function() {
         .attr("width", vis.xScale.bandwidth())
         .attr('fill', function(d) {
             if (d.key === "Fare Revenue" || d.key === "Driver Pre-Tax Income") {
-                return "#006837";
+                return '#5cb85c';
             } else {
-                return "#a50026";
+                return '#d9534f';
             }
         });
 
