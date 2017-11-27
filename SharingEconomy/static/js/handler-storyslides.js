@@ -10,9 +10,9 @@ var stories = {
                     {text:"He decides to see how both are faring in the largest market in the US, New York City.",icon:'<img src="static/img/nyc.svg" class="img-icon"/>'}],
                 slide6: [{text:studentName + " is a student at Harvard University. ", icon:'<i class="fa fa-female"></i>'},
                     {text:"She needs to get to the airport and isn't sure whether or not to take an Uber or Taxi. ", icon:'<i class="fa fa-question-circle"></i>'},
-                    {text:"She takes a closer look at the prices to help decide.", icon:'<i class="fa fa-money"></i>'}],
+                    {text:"She takes a closer look at the prices to help make a decision.", icon:'<i class="fa fa-money"></i>'}],
                 slide8: [{text:studentName + ' decides to order an Uber and is picked up by ' + driverName + '. ', icon:'<img src="static/img/car-icon.png" class="img-icon"/>'},
-                    {text:"After dropping " + studentName + ' off, ' + driverName + ' receives payment from Uber, and tries to figure out what his annual income would be.', icon:'<i class="fa fa-money"></i>'}]
+                    {text:"After dropping " + studentName + ' off, ' + driverName + ' receives payment from Uber, and tries to figure out if it\'s worth it to keep driving for Uber.', icon:'<i class="fa fa-money"></i>'}]
 };
 
 function addStoryElements(index) {

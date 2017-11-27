@@ -1,6 +1,0 @@
-{
-  "uber": {"win":10, "lose":5},
-  "taxi": {"win":8, "lose":6},
-  "consumer": {"win":7, "lose":9},
-  "worker": {"win":5, "lose":1}
-}

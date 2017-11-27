@@ -17,7 +17,7 @@
 	<div id="fullPage">
 		<section class="section">
 			<div class="title-banner"></div>
-			<div class="section-header" style="margin-top: 100px; font-size: 60px;">Who Wins in the Sharing Economy?</div><br>
+			<div class="section-header" style="margin-top: 200px; font-size: 60px;">Who Wins in the Sharing Economy?</div><br>
 		</section>
 		<section class="section">
 			<div class="title-banner"></div>
@@ -117,35 +117,54 @@
 			<div id="story-container-8" class="container story-text"></div>
 		</section>
 		<section class="section">
-			<div class="col-md-8">
-				<div id="driver-income-chart" style="width: 100%; height: 400px;"></div>
-			</div>
-			<div class="col-md-3">
-				<h3>[Uber Driver Income-WIP]</h3>
-				<!-- Select box to choose the ranking type -->
-				<form class="form-inline">
-					<div class="form-group">
-						<label for="dataType">Target Annual Income</label>
-						<select class="form-control" id="income-level">
-							<option value="value10">$10,000</option>
-							<option value="value20">$20,000</option>
-							<option value="value30">$30,000</option>
-							<option value="value40">$40,000</option>
-							<option value="value50">$50,000</option>
-							<option value="value60">$60,000</option>
-							<option value="value70">$70,000</option>
-							<option value="value80">$80,000</option>
-							<option value="value90">$90,000</option>
-							<option value="value100">$100,000</option>
-						</select>
+			<div class="section-header">Driver's Decision: Drive for Uber?</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div id="driver-income-chart">
 					</div>
-				</form>
-				<ul>
-					<li>Display driver economics, fare revenue & miles driven required to hit a given takehome income threshold</li>
-					<li>Make dynamic - add dropdown to select between various annual incomes (& add transitions)</li>
-					<li>Fix labels & colors, add tooltips, display distance</li>
-					<li>Innovative design -- display a map contour with miles/distance required for each income target</li>
-				</ul>
+				</div>
+				<div class="col-md-3">
+					<h4 class="info-section-header">Annual earnings estimator</h4>
+					<p>Select your target annual pre-tax income to see how much you'll need to drive with Uber and where the money goes.
+						Remember, this is pre-tax and you're not a full-time employee, so healthcare & savings is on you!</p>
+					<!-- Select box to choose the ranking type -->
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="dataType">Target annual income</label>
+							<select class="form-control interaction-header" id="income-level" onchange="updateIncomeChart()">
+								<option value="value10">$10,000</option>
+								<option value="value20">$20,000</option>
+								<option value="value30">$30,000</option>
+								<option value="value40">$40,000</option>
+								<option value="value50" selected="selected">$50,000</option>
+								<option value="value60">$60,000</option>
+								<option value="value70">$70,000</option>
+								<option value="value80">$80,000</option>
+								<option value="value90">$90,000</option>
+								<option value="value100">$100,000</option>
+							</select>
+						</div>
+					</form>
+					<br>
+					<br>
+					<h4 id="name" class="info-section-header">Weekly targets (on UberX)</h4>
+					<table class="table table-striped">
+						<tbody>
+						<tr>
+							<th>Fare revenue ($)</th>
+							<td id="weekly-fare"></td>
+						</tr>
+						<tr>
+							<th>Number of trips</th>
+							<td id="weekly-trips"></td>
+						</tr>
+						<tr>
+							<th>Number of billed miles driven</th>
+							<td id="weekly-miles"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</section>
 		<section class="section">
@@ -212,7 +231,8 @@
 				<h4>Data Sources</h4>
 				<ol>
 					<li><strong>Uber Timeline</strong>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
-					<li><strong>Consumer's Choice</strong>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a></li>
+					<li><strong>Consumer's Choice</strong>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
+					<li><strong>Driver's Decision</strong>: <a href="http://uberestimate.com/prices/Boston/">Cost Assumptions and Public Pricing</a>, assumes no unpaid miles, and associated costs, between rides, which likely leads to overestimates of earnings.</li>
 				</ol>
 			</div>
 		</section>
@@ -240,13 +260,14 @@
 	<script src="../static/js/vis-relativevaluescatter.js"></script>
 	<script src="../static/js/handler-timelineslide.js"></script>
 	<script src="../static/js/vis-timeline.js"></script>
-	<script src="../static/js/vis-driverIncome.js"></script>
+	<script src="../static/js/handler-driverincomeslide.js"></script>
+	<script src="../static/js/vis-driverincomebar.js"></script>
 	<script src="../static/js/handler-voteslide.js"></script>
 	<script src="../static/js/vis-votesbar.js"></script>
 
 	<script>
 		initializeElements();
-		initializeVotes({{votes|tojson}});
+		//initializeVotes({{votes|tojson}});
 	</script>
 
 </body>

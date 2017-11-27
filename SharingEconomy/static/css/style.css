@@ -17,6 +17,16 @@ body {
     display: inline-block;
 }
 
+.info-section-header {
+    background-color: #09091a;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    display: inline-block;
+}
+
 .section-subheader {
     font-size: 18px;
     color: #09091a;
@@ -258,13 +268,7 @@ select {
     margin: 0 auto;
     margin-bottom: 10px;
 }
-/* relative value map */
 
-/***waterfall chart***/
-.rect--negative {
-    fill: brown;
+.income-bar:hover {
+    fill: grey;
 }
-
-/*.rect--positive {
-    fill: #508622;
-}*/
