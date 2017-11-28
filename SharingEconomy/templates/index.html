@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>The Sharing Economy</title>
 
+	<link rel="icon", href="../static/img/car-icon.png">
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../static/css/jquery.fullpage.css">
@@ -62,7 +63,29 @@
 			<div id="story-container-4" class="container story-text"></div>
 		</section>
 		<section class="section">
-			section looking at uber trips relative to taxi trips coupled with valuation
+			<div class="section-header">Ridership Fight: Uber vs. Taxi</div>
+			<div class="row">
+				<div class="col-md-8">
+					<select class="form-control interaction-header" id="ride-service-provider" onchange="filter_ride_service_provider()">
+						<option value="All">All Service Providers</option>
+						<option value="Yellow Cab">Yellow Cab</option>
+						<option value="Uber">Uber</option>
+						<option value="Lyft">Lyft</option>
+						<option value="Via">Via</option>
+						<option value="Juno">Juno</option>
+				</select>
+				</div>
+				<div class="col-md-3">
+					<h4 id="name" class="info-section-header" style="text-align: center;">Company Valuations</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div id="rides-per-day"></div>
+				</div>
+				<div class="col-md-3" id="valuation-conatiner">
+				</div>
+			</div>
 		</section>
 		<section class="section">
 			<div class="title-banner"></div>
@@ -117,7 +140,7 @@
 			<div id="story-container-8" class="container story-text"></div>
 		</section>
 		<section class="section">
-			<div class="section-header">Driver's Decision: Drive for Uber?</div>
+			<div class="section-header">Worker's Decision: Drive for Uber?</div>
 			<div class="row">
 				<div class="col-md-8">
 					<div id="driver-income-chart">
@@ -130,7 +153,7 @@
 					<!-- Select box to choose the ranking type -->
 					<form class="form-inline">
 						<div class="form-group">
-							<label for="dataType">Target annual income</label>
+							<label for="dataType">Target Annual Income</label>
 							<select class="form-control interaction-header" id="income-level" onchange="updateIncomeChart()">
 								<option value="value10">$10,000</option>
 								<option value="value20">$20,000</option>
@@ -147,7 +170,7 @@
 					</form>
 					<br>
 					<br>
-					<h4 id="name" class="info-section-header">Weekly targets (on UberX)</h4>
+					<h4 id="name" class="info-section-header">Weekly Targets (on UberX)</h4>
 					<table class="table table-striped">
 						<tbody>
 						<tr>
@@ -213,13 +236,13 @@
 			<div class="col-md-6">
 				<h2 class="section-header">Project Info</h2>
 				<ol>
-					<li><strong>Authors</strong>: Tansaya Kunaratskul, Jonathan Mazumdar, Ihsaan Patel</li>
+					<li><strong>Authors</strong>: Tansaya Kunaratskul, Jonathan Mazumdar, <a href="https://www.linkedin.com/in/ihsaanpatel/">Ihsaan Patel</a></li>
 					<li><strong>Project Resources</strong>: <a href="https://github.com/pateli18/cs171sharingeconomy">Github</a> and <a href="">Process Book</a></li>
 				</ol>
 			</div>
 			<div class="col-md-6">
 				<h2 class="section-header">References</h2>
-				<h4>Images</h4>
+				<h4 style="text-decoration: underline;"><strong>Images</strong></h4>
 				<ol>
 					<li><strong>Tile Banner</strong>: <a href="https://www.flickr.com/photos/kevingessner/3604506601/sizes/l">Taxis</a>,
 					<a href="https://www.flickr.com/photos/5chw4r7z/13449380733/sizes/l">Uber</a>,
@@ -228,7 +251,7 @@
 					</li>
 					<li><strong>Logos / Icons</strong>: <a href="https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.4/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg">Uber Logo</a>, <a href="https://www.flaticon.com/free-icon/new-york-panoramic-buildings-silhouette_53137">NYC Icon</a></li>
 				</ol>
-				<h4>Data Sources</h4>
+				<h4 style="text-decoration: underline;"><strong>Data Sources</strong></h4>
 				<ol>
 					<li><strong>Uber Timeline</strong>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
 					<li><strong>Consumer's Choice</strong>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
@@ -252,14 +275,16 @@
 	<script src="../static/js/colorbrewer.js"></script>
 	<script src="../static/js/jquery-ui.min.js"></script>
 
-	<!-- Choropleth and second visualization -->
+	<!-- Handlers and visualizations -->
 	<script src="../static/js/main.js"></script>
 	<script src="../static/js/handler-storyslides.js"></script>
+	<script src="../static/js/handler-timelineslide.js"></script>
+	<script src="../static/js/vis-timeline.js"></script>
+	<script src="../static/js/handler-rideslide.js"></script>
+	<script src="../static/js/vis-rideline.js"></script>
 	<script src="../static/js/handler-relativevalueslide.js"></script>
 	<script src="../static/js/vis-relativevaluemap.js"></script>
 	<script src="../static/js/vis-relativevaluescatter.js"></script>
-	<script src="../static/js/handler-timelineslide.js"></script>
-	<script src="../static/js/vis-timeline.js"></script>
 	<script src="../static/js/handler-driverincomeslide.js"></script>
 	<script src="../static/js/vis-driverincomebar.js"></script>
 	<script src="../static/js/handler-voteslide.js"></script>

@@ -1,6 +1,6 @@
 
 var storyIndices = [2, 4, 6, 8];
-var slideRun = {2:true, 3:true, 4:true, 6:true, 8:true};
+var slideRun = {2:true, 3:true, 4:true, 5:true, 6:true, 8:true};
 
 $(function() {
     $('#fullPage')
@@ -17,10 +17,18 @@ $(function() {
                         setTimeout(addStoryElements(index), 5000);
                     }
                 }
+                
                 if (index === 3) {
                     if (slideRun[index]) {
                         slideRun[index] = false;
                         setTimeout(timeline_button_click, 1000);
+                    }
+                }
+
+                if (index == 5) {
+                    if (slideRun[index]) {
+                        slideRun[index] = false;
+                        setTimeout(animateRideVis, 1000);
                     }
                 }
             },
