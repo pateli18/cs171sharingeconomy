@@ -3,10 +3,10 @@ var rideChartData;
 var rideVis;
 var cars = [];
 var numPoints;
+var servicesDomain = ["Yellow Cab","Uber", "Lyft", "Via", "Juno"];
+var servicesColorRange = ["#ffd651","#050605","#cd25c8","#53e2e1","#4f55b8"];
 
 d3.csv("static/data/rides/number_of_rides_per_day_total_NYC.csv", function(rideData){
-
-    services = ['Yellow Cab', 'Uber', 'Lyft', 'Via', 'Juno'];
 
     rideChartData = [];
 
@@ -15,7 +15,7 @@ d3.csv("static/data/rides/number_of_rides_per_day_total_NYC.csv", function(rideD
 
     rideData.forEach(function(d){
 
-        services.forEach(function(s) {
+        servicesDomain.forEach(function(s) {
             var dataElement = {};
             dataElement.time = d3.timeParse("%m/%d/%y")(d.Time);
             // dataElement.time = d3.timeFormat("%Y-/%m")(d.Time);
@@ -41,24 +41,7 @@ d3.csv("static/data/rides/number_of_rides_per_day_total_NYC.csv", function(rideD
 
 function filter_ride_service_provider() {
   rideVis.wrangleData();
-}
-
-/*
-    rideVis.displayData.forEach(function(d) {
-        var car = {};
-        car.svg = rideVis.svg.append("image")
-                    .attr('id', 'car-icon-' + d.key)
-                    .attr('class', 'ride-car-icon')
-                    .attr("href", d.values[0].img)
-                    .attr("width", 40)
-                    .attr("height", 40)
-                    .attr("x", -40)
-                    .attr("y", rideVis.yScale(d.values[0].rides));
-        car.data = d.values;
-        cars.push(car);
-    });
-*/
-
+};
 
 //Create viz instance
 function animateRideVis(){
@@ -73,13 +56,7 @@ function animateRideVis(){
     .attr('fill', 'white');
 
   var moveRideCar = setInterval(function() {
-        /*
-        cars.forEach(function(d) {
-          d.svg
-          .attr('x', rideVis.xScale(d.data[counter].time) - 40)
-          .attr('y', rideVis.yScale(d.data[counter].rides) + 40);
-        });
-        */
+
         blockRect.attr('x', counter)
         .attr('width', rideVis.width - counter);
         counter += 1;
@@ -88,4 +65,44 @@ function animateRideVis(){
             clearInterval(moveRideCar);
         }
     }, 1);
-}
+};
+
+function lineToolTipShow() {
+
+    var bisectDate = d3.bisector(function(d) { return d.time; }).left;
+
+    var x0 = rideVis.xScale.invert(d3.mouse(this)[0]);
+    
+    rideVis.lineToolTip
+      .attr('x1', rideVis.xScale(x0) - 5)
+      .attr('x2', rideVis.xScale(x0) - 5)
+      .attr('stroke', '#09091a');
+
+    rideVis.lineToolTipText
+      .attr('x', rideVis.xScale(x0))
+      .text(d3.timeFormat('%B %Y')(x0));
+
+    rideVis.displayData.forEach(function(d, i) {
+        var i = bisectDate(d.values, x0, 1);
+        var d0 = d.values[i - 1];
+        var d1 = d.values[i];
+        var dA = x0 - d0.time > d1.time - x0 ? d1 : d0;
+        d3.select('#ride-tooltip-label-' + d.key.charAt(0))
+          .attr('x', rideVis.xScale(x0))
+          .text(d3.format(",.0f")(dA.rides));
+    });
+};
+
+function lineToolTipHide() {
+
+    rideVis.lineToolTip
+      .attr('stroke', 'none');
+
+    rideVis.lineToolTipText
+      .text('');
+
+    rideVis.displayData.forEach(function(d) {
+        d3.select('#ride-tooltip-label-' + d.key.charAt(0))
+          .text('');
+    });
+};

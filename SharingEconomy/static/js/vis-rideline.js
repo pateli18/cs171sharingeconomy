@@ -11,7 +11,7 @@ RideVis = function(_parentElement, _rideData){
 
 RideVis.prototype.initVis = function() {
     var vis = this;
-    vis.margin = {top: 20, right: 100, bottom: 20, left: 60};
+    vis.margin = {top: 20, right: 150, bottom: 20, left: 60};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
@@ -59,15 +59,47 @@ RideVis.prototype.initVis = function() {
         .text("Rides per Day");
 
 //color domain
-    vis.colorDomain = ["Yellow Cab","Uber", "Lyft", "Via", "Juno"];
     vis.colorPalette = d3.scaleOrdinal()
-        .range(["#ffd651","#050605","#cd25c8","#53e2e1","#4f55b8"])
-        .domain(vis.colorDomain);
+        .range(servicesColorRange)
+        .domain(servicesDomain);
 
 // draw line
     vis.line = d3.line()
         .x(function(d){ return vis.xScale(d.time);})
         .y(function(d){return vis.yScale(d.rides);});
+
+    d3.select("#" + vis.parentElement).select("svg").append("rect")
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")")
+        .attr("class", "overlay")
+        .attr("width", vis.width)
+        .attr("height", vis.height)
+        .on("mouseover", lineToolTipShow)
+        .on("mouseout", lineToolTipHide)
+        .on("mousemove", lineToolTipShow);
+
+    vis.lineToolTip = vis.svg.append('line')
+        .attr('x1', 0)
+        .attr('x2', 0)
+        .attr('y1', vis.height)
+        .attr('y2', 0)
+        .attr('stroke', 'none')
+        .attr('stroke-width', '2px');
+
+    vis.lineToolTipText = vis.svg.append('text')
+        .attr('x', 0)
+        .attr('y', 15)
+        .attr('fill','#09091a')
+        .style('font-weight', 'bold')
+        .text('');
+
+    servicesDomain.forEach(function(d, i) {
+        vis.svg.append('text')
+        .attr('id', 'ride-tooltip-label-' + d.charAt(0))
+        .attr('x', 0)
+        .attr('y', 30 + 15*i)
+        .attr('fill',vis.colorPalette(d))
+        .text('');
+    });
 
     vis.wrangleData();
 
@@ -148,33 +180,6 @@ RideVis.prototype.updateVis = function() {
     lineLabel.exit().remove();
 
     vis.svg.select(".y-axis").transition().duration(1000).call(vis.yAxis);
-
-// car images
-
-    /*
-    vis.displayData.forEach(function(serviceData) {
-
-        var rideImage = vis.svg.selectAll(".ride-img-" + serviceData.key)
-            .data(serviceData.values);
-
-        rideImage.enter().append("image")
-            .attr("class", "ride-img-" + serviceData.key)
-            .attr('xlink:href',function(d){
-                return d.img;
-            })
-            .attr('height', '50')
-            .attr('width', '50')
-            .merge(rideImage)
-            .transition()
-            .duration(1000)
-            .attr("x", function(d){ return vis.xScale(d.time);})
-            .attr("y",function(d){return vis.yScale(d.rides);});
-
-        rideImage.exit().remove();
-
-    });
-    */
-
     
 };
 

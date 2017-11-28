@@ -272,3 +272,8 @@ select {
 .income-bar:hover {
     fill: grey;
 }
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
