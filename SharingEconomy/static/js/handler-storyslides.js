@@ -2,18 +2,17 @@
 var driverName = 'Jonathan';
 var studentName = 'Tansaya';
 
-var stories = {
-                slide2: [{text: driverName + " just immigrated to the US and is looking for work. ", icon:'<i class="fa fa-male"></i>'},
-                    {text:"He hears about new opportunities in the sharing economy and wants to learn more. ",icon:'<i class="fa fa-briefcase"></i>'},
-                    {text:"He decides to do more research on the largest and most well-known sharing economy company, Uber.", icon:'<img src="static/img/uber-logo.jpg" class="img-icon"/>'}],
-                slide4: [{text:driverName + " is interested in Uber but wonders if he should just drive a taxi instead. ", icon:'<i class="fa fa-taxi"></i>'},
-                    {text:"He decides to see how both are faring in the largest market in the US, New York City.",icon:'<img src="static/img/nyc.svg" class="img-icon"/>'}],
+var stories = {slide2: [{text: driverName + " just immigrated to the US and is looking for work. ", icon:'<i class="fa fa-male"></i>'},
+                    {text:"He hears about new opportunities in the sharing economy and about the ride-sharing service called Uber. ",icon:'<i class="fa fa-briefcase"></i>'},
+                    {text:"His friend tells him that he can earn a living by become Uber's driver." + driverName +" wonders how much he can earn from doing it", icon:'<img src="static/img/uber-logo.jpg" class="img-icon"/>'}],
+                slide4: [{text:driverName + " has been driving for Uber for awhile, and wonders how taxi companies are competing with the ride-sharing services. ", icon:'<i class="fa fa-taxi"></i>'},
+                    {text:"He decides to do more research in the largest market in the US, New York City.",icon:'<img src="static/img/nyc.svg" class="img-icon"/>'}],
                 slide6: [{text:studentName + " is a student at Harvard University. ", icon:'<i class="fa fa-female"></i>'},
-                    {text:"She needs to get to the airport and isn't sure whether or not to take an Uber or Taxi. ", icon:'<i class="fa fa-question-circle"></i>'},
+                    {text:"She needs to get to the airport and is deciding whether to take Uber or taxi. ", icon:'<i class="fa fa-question-circle"></i>'},
                     {text:"She takes a closer look at the prices to help make a decision.", icon:'<i class="fa fa-money"></i>'}],
                 slide8: [{text:studentName + ' decides to order an Uber and is picked up by ' + driverName + '. ', icon:'<img src="static/img/car-icon.png" class="img-icon"/>'},
                     {text:"After dropping " + studentName + ' off, ' + driverName + ' receives payment from Uber, and tries to figure out if it\'s worth it to keep driving for Uber.', icon:'<i class="fa fa-money"></i>'}]
-};
+                };
 
 function addStoryElements(index) {
     var story = stories["slide" + index];

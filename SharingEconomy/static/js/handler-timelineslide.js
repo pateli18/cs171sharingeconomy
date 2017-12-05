@@ -8,8 +8,9 @@ var mapToolTip = d3.tip()
 
 var eventCategories = ['Company', 'Expansion', 'Funding', 'Competition', 'Regulatory', 'Product'];
 
-var mapColorScale = d3.scaleOrdinal(d3.schemeCategory10)
-    .domain(eventCategories);
+var mapColorScale = d3.scaleOrdinal()
+    .domain(eventCategories)
+    .range(["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#2c7fb8","#253494"]);
 
 var timelineDataBase;
 var timelineData;
@@ -49,8 +50,8 @@ queue()
             .data(worldMap)
             .enter().append("path")
             .attr("d", path)
-            .style('fill', '#09091a')
-            .style('stroke', '#c0c0c8');
+            .style('fill', '#b4acaf')
+            .style('stroke', '#ebebeb');
 
         var uber_logo_path = [-160, 5];
         var worldwide_label_event = [-149, 7];
@@ -64,7 +65,6 @@ queue()
         mapSVG.append("text")
             .attr("transform", "translate(" + mapProjection(worldwide_label_event) + ")")
             .style("font-weight", "bold")
-            .style("text-decoration", "underline")
             .text('Global Events');
 
         var mapLegend = d3.legendColor()

@@ -6,12 +6,13 @@ var numPoints;
 var servicesDomain = ["Yellow Cab","Uber", "Lyft", "Via", "Juno"];
 var servicesColorRange = ["#ffd651","#050605","#cd25c8","#53e2e1","#4f55b8"];
 
+
 d3.csv("static/data/rides/number_of_rides_per_day_total_NYC.csv", function(rideData){
 
     rideChartData = [];
 
     numPoints = rideData.length;
-    console.log(numPoints); 
+    console.log(numPoints);
 
     rideData.forEach(function(d){
 

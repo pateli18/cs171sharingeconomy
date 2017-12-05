@@ -40,13 +40,13 @@ IncomeChart.prototype.initVis = function() {
         .scale(vis.xScale);
 
     vis.svg.append("g")
-        .attr("class", "axis x-axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + vis.height + ")")
         .append('text')
-        .attr('class', 'x-label')
+        .attr('class', 'axis-label')
         .attr('transform', "translate(" + (vis.width / 2) + "," + 40 + ")")
         .attr('class', 'axis-label')
-        .text('Revenue / (Expense)');;
+        .text('Revenue / (Expense)');
 
     // Add y-axis
     vis.yAxis = d3.axisLeft()
@@ -54,10 +54,10 @@ IncomeChart.prototype.initVis = function() {
         .tickFormat(d3.format('$,.0f'));
 
     vis.svg.append("g")
-        .attr("class", "axis y-axis")
+        .attr("class", "y-axis")
         .attr("transform", "translate(0,0)")
         .append('text')
-        .attr('class', 'y-label')
+        .attr('class', 'axis-label')
         .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
         .attr("transform", "translate("+ (12) +","+ (40) +")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
         .attr('class', 'axis-label')
@@ -104,15 +104,15 @@ IncomeChart.prototype.updateChart = function() {
             }
             var contributionColor;
             if (contribution < 0) {
-                contributionColor = '#d9534f';
+                contributionColor = "#fb6a4a";
             } else if (contribution > 0) {
-                contributionColor = '#5cb85c';
+                contributionColor = "#41b6c4";
             } else {
                 contributionColor = "grey";
             }
             return '<div style="text-align: center; color:white; font-size:16px;"><strong>' + d.key + '</strong></div>' +
             '<span style="font-size:12px;">Contribution: <span style="color:' + contributionColor + ';">' + d3.format('($,.0f')(contribution) + '</span></span><br>' +
-            '<span style="font-size:12px;">Net: <span style="color:#5cb85c;">' + d3.format('$,.0f')(net) + '</span></span>';
+            '<span style="font-size:12px;">Net: <span style="color:#41b6c4;">' + d3.format('$,.0f')(net) + '</span></span>';
         });
 
     vis.svg.call(vis.tooltip);
@@ -134,9 +134,9 @@ IncomeChart.prototype.updateChart = function() {
         .attr("width", vis.xScale.bandwidth())
         .attr('fill', function(d) {
             if (d.key === "Fare Revenue" || d.key === "Driver Pre-Tax Income") {
-                return '#5cb85c';
+                return "#41b6c4";
             } else {
-                return '#d9534f';
+                return "#fb6a4a";
             }
         });
 

@@ -42,19 +42,19 @@ ScatterPlot.prototype.initVis = function() {
         .scale(vis.yScale);
 
     vis.svg.append("g")
-        .attr("class", "x-axis axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + vis.height + ")")
         .append('text')
-        .attr('transform', "translate(" + (vis.width / 1.15) + ",-5)")
+        .attr('transform', "translate(" + (vis.width / 2+250) + ",-10)")
         .attr('class', 'axis-label')
         .text('Driving Miles from Harvard Square');
 
     vis.svg.append("g")
-        .attr("class", "y-axis axis")
+        .attr("class", "y-axis")
         .append('text')
-        .attr('class', 'y-label')
+        .attr('class', 'axis-label')
         .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-        .attr("transform", "translate("+ (12) +","+ (vis.height / 4 + 10) +")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+        .attr("transform", "translate("+ (15) +","+ (vis.height / 4 + 30) +")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
         .attr('class', 'axis-label')
         .text("Driving Minutes from Harvard Square");
 

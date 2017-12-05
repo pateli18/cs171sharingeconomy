@@ -71,9 +71,9 @@ BarChart.prototype.updateData = function() {
         .duration(1000)
         .attr('fill', function(d) {
             if (d.name === 'Win') {
-                return '#5cb85c';
+                return "#41b6c4";
             } else {
-                return '#d9534f';
+                return "#fb6a4a";
             }
         })
         .attr('x', function(d) {
