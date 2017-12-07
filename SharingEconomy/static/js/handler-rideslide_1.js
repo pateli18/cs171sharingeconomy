@@ -6,26 +6,26 @@ var numPoints;
 var filterDate;
 var maxDate;
 var servicesDomain = ["Yellow Cab","Uber", "Lyft", "Via", "Juno"];
-var servicesColorRange = ["#e69d49","#050605","#542788","#8073ac","#b2abd2"];
+var servicesColorRange = ["#eebf08","#050605","#542788","#8073ac","#b2abd2"];
 
 queue()
     .defer(d3.csv, "static/data/rides/number_of_rides_per_day_total_NYC.csv")
     .defer(d3.csv, "static/data/rides/number_of_vehicles.csv")
-    .await(function(error, rideData, valuationData){
+    .await(function(error, rideData, vehicleData){
 
     rideChartData = [];
 
     numPoints = rideData.length;
 
-    valuationData.forEach(function(d) {
-        d.time = d3.timeParse("%b-%y")(d.time);
+        vehicleData.forEach(function(d) {
+        d.Time = d3.timeParse("%b-%y")(d.Time);
     });
 
     rideData.forEach(function(d){
 
         servicesDomain.forEach(function(s) {
             var dataElement = {};
-            dataElement.time = d3.timeParse("%m/%d/%y")(d.Time);
+            dataElement.Time = d3.timeParse("%m/%d/%y")(d.Time);
             // dataElement.time = d3.timeFormat("%Y-/%m")(d.Time);
            dataElement.service = s;
            dataElement.rides = +d[s];
@@ -34,14 +34,14 @@ queue()
                dataElement.rides = 0;
            }
 
-          var valuationElement = valuationData.filter(function(v) {
-              return v.time <= dataElement.time;
+          var vehicleElement = vehicleData.filter(function(v) {
+              return v.Time <= dataElement.Time;
           });
 
-          valuationElement = valuationElement[valuationElement.length - 1];
-          dataElement.drivers = +valuationElement[s];
-          if (isNaN(dataElement.drivers)) {
-               dataElement.drivers = 0;
+            vehicleElement = vehicleElement[vehicleElement.length - 1];
+          dataElement.vehicle = +vehicleElement[s];
+          if (isNaN(dataElement.vehicle)) {
+               dataElement.vehicle = 0;
            }
 
            rideChartData.push(dataElement);
@@ -50,35 +50,33 @@ queue()
 
     });
 
-    rideChartData.sort(function(a, b) {
+    rideData.sort(function(a, b) {
       return a.time - b.time;
     });
-
-    console.log(rideChartData);
 
     rideVis = new RideVis("rides-per-day", rideChartData);
 
     maxDate = d3.max(rideChartData, function(d) {
-            return d.time;
+            return d.Time;
         });
 
     filterDate = maxDate;
 
     var vehicleDomain = d3.extent(rideChartData, function (d) {
-            return d.drivers;
+            return d.vehicle;
         });
 
     vehicleChartData =  d3.nest()
         .key(function(d) { return d.service; })
         .entries(rideChartData);
 
-    var vehicleContainer = d3.select('#vehicle-container');
-    vehicleChartData.forEach(function(d) {
-       var circleContainer = vehicleContainer.append("div")
-           .attr('id', 'vehicle-container-' + d.key);
+    var valuationContainer = d3.select('#valuation-container');
+    valuationChartData.forEach(function(d) {
+       var circleContainer = valuationContainer.append("div")
+           .attr('id', 'valuation-container-' + d.key);
 
-       var vehicleChart = new VehicleVis('vehicle-container-' + d.key, d.values, vehicleDomain, d.key);
-       valuationCharts.push(vehicleChart);
+       var valuationChart = new ValuationVis('valuation-container-' + d.key, d.values, valuationDomain, d.key);
+       valuationCharts.push(valuationChart);
 
     });
 
