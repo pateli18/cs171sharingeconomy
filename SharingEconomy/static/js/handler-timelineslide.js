@@ -10,7 +10,7 @@ var eventCategories = ['Company', 'Expansion', 'Funding', 'Competition', 'Regula
 
 var mapColorScale = d3.scaleOrdinal()
     .domain(eventCategories)
-    .range(["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#2c7fb8","#253494"]);
+    .range(["#e17638","#e69d49","#e1bc71","#887bb4","#67279b","#4a0073"]);
 
 var timelineDataBase;
 var timelineData;
@@ -50,7 +50,7 @@ queue()
             .data(worldMap)
             .enter().append("path")
             .attr("d", path)
-            .style('fill', '#b4acaf')
+            .style('fill', '#736e6f')
             .style('stroke', '#ebebeb');
 
         var uber_logo_path = [-160, 5];
@@ -192,7 +192,9 @@ function run_event_timer() {
 function add_events(eventData) {
 
     mapToolTip.html(function(d) {
-        return '<strong style="color: ' + mapColorScale(d['Event type']) + ';">' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>: ' + d.Headline + '<br>';
+        var x = '<span style="color:white"><strong>' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>:</span> <p>' + d.Headline + '</p>';
+        console.log(x);
+        return x;
     });
 
     mapSVG.call(mapToolTip);
@@ -234,7 +236,7 @@ function add_event_boxes(eventBoxes) {
         .append("p")
         .attr("class", "event-box")
         .html(function(d) {
-            return '<strong style="color: ' + timelineChart.colorScale(d['Event type']) + ';">' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>: ' + d.Headline + '<br>';
+            return '<strong style="color: ' + mapColorScale(d['Event type']) + ';">' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>: ' + d.Headline + '<br>';
         })
         .merge(eventBox)
         .attr('color', 'black');

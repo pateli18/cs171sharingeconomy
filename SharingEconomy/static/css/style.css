@@ -4,7 +4,7 @@
 body {
     font-family: 'Lato',sans-serif;
     color: black;
-    background-color: #ebebeb;
+    background-color: #dddddd;
 }
 .mega-header {
     font-family: 'Titillium Web', sans-serif;
@@ -42,12 +42,12 @@ body {
     color: black;
 }
 #section-intro{
-    background-image: url(../img/bw_bg.png);
+    background-image: url(../img/bw_bg2.png);
     background-size: cover;
     padding: 0;
 }
 #section-lastpart{
-    background-image: url(../img/bw_bg2.png);
+    background-image: url(../img/bw_bg.png);
     background-size: cover;
     padding: 0;
 }
@@ -96,7 +96,9 @@ body {
 .control-header {
     font-weight: bold;
 }
-
+a{
+    color: #f8c908;
+}
 .axis-label {
     fill: grey;
     font-family: 'Lato',sans-serif;

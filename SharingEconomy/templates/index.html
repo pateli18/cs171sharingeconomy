@@ -196,13 +196,13 @@
 		</section>
 
 		<section class="section">
-			<div class="section-header">Uber's Rivals: How the Rise of Uber Affects the Incumbent Taxi Companies and Other Ride-Sharing Services?
+			<div class="section-header">Uber's Rivals: How the Ride-Sharing Services Affect the Incumbent Taxi Services?
 			</div>
 			<div id="story-container-4" class="container story-text"></div>
 		</section>
 
 		<section class="section">
-			<div class="section-header">Ridership Fight: Ride-Sharing Services vs. Taxi</div>
+			<div class="section-header">Ridership Fight: Ride-Sharing Services vs. Taxi in New York City</div>
 			<div class="row">
 				<div class="col-md-8">
 					<select class="form-control interaction-header" id="ride-service-provider" onchange="filter_ride_service_provider()">
@@ -215,15 +215,15 @@
 				</select>
 				</div>
 				<div class="col-md-3">
-					<h4 id="name" class="info-section-header" style="text-align: center;">Company Valuations</h4>
+					<h4 id="name" class="info-section-header" style="text-align: center;">Number of Unique Vehicle Dispatched by Services</h4>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
 					<div id="rides-per-day"></div>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<h4 id="name" class="info-section-header">Company Valuations</h4>
+				<div class="col-md-3" id ="vehicle-container" style="text-align: center;">
+
 				</div>
 			</div>
 		</section>
@@ -274,7 +274,7 @@
 				<h2 class="section-header" ><font color ="white">Project Info</font></h2>
 				<ol>
 					<font color ="white" size="4px"><li><strong>Authors</strong><font color ="white" size="4px">: Tansaya Kunaratskul, Jonathan Mazumdar, <a href="https://www.linkedin.com/in/ihsaanpatel/"><font color ="white" size="4px">Ihsaan Patel</a></font></li>
-					<li><strong><font color ="white" size="4px">Project Resources</font></strong>: <a href="https://github.com/pateli18/cs171sharingeconomy"><font color ="white" size="4px">Github</font></a><font color ="white" size="4px"> and <a href=""><font color ="white" size="4px">Process Book</a></font></li>
+					<li><font color ="white" size="4px">Project Resources</font>: <a href="https://github.com/pateli18/cs171sharingeconomy"><font color ="white" size="4px">Github</font></a><font color ="white" size="4px"> and <a href=""><font color ="white" size="4px">Process Book</a></font></li>
 				</ol>
 			</div>
 			<div class="col-md-6">
@@ -286,13 +286,14 @@
 					<a href="https://www.flickr.com/photos/jeffbpictures/5852265423/sizes/l">Boston</a>,
 						<a href="https://www.flickr.com/photos/kaysha/4736796413/sizes/l">Driving Dashboard</a>
 					</li>
-					<li><strong><font color ="white">Logos / Icons</font></strong>: <a href="https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.4/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg">Uber Logo</a>, <a href="https://www.flaticon.com/free-icon/new-york-panoramic-buildings-silhouette_53137">NYC Icon</a></li>
+					<li><font color ="white">Logos / Icons</font>: <a href="https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.4/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg">Uber Logo</a>, <a href="https://www.flaticon.com/free-icon/new-york-panoramic-buildings-silhouette_53137">NYC Icon</a></li>
 				</ol>
 				<h4 style="text-decoration: underline;"><strong><font color ="white">Data Sources</font></strong></h4>
 				<ol>
-					<li><strong><font color ="white">Uber Timeline</font></strong>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
-					<li><strong><font color ="white">Consumer's Choice</font></strong>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
-					<li><strong><font color ="white">Driver's Decision</font></strong>: <a href="http://uberestimate.com/prices/Boston/">Cost Assumptions and Public Pricing</a>, assumes no unpaid miles, and associated costs, between rides, which likely leads to overestimates of earnings.</li>
+					<li><font color ="white">Uber Timeline</font>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
+					<li><font color ="white">Consumer's Choice</font>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
+					<li><font color ="white">Driver's Decision</font>: <a href="http://uberestimate.com/prices/Boston/">Cost Assumptions and Public Pricing</a>, assumes no unpaid miles, and associated costs, between rides, which likely leads to overestimates of earnings.</li>
+					<li><font color ="white">Number of Rides and Vehicles in NYC:</font><a href="https://data.cityofnewyork.us/Transportation/Aggregate-ALLrideshares-rides/wd23-mvax">NYC Open Data</a></li>
 				</ol>
 			</div>
 		</section>
@@ -320,6 +321,7 @@
 	<script src="../static/js/handler-rideslide.js"></script>
 	<script src="../static/js/vis-rideline.js"></script>
 	<script src="../static/js/vis-ridevaluation.js"></script>
+	<script src="../static/js/vis-rides_vehicle.js"></script>
 	<script src="../static/js/handler-relativevalueslide.js"></script>
 	<script src="../static/js/vis-relativevaluemap.js"></script>
 	<script src="../static/js/vis-relativevaluescatter.js"></script>

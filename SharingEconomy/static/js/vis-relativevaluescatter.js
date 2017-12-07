@@ -32,8 +32,9 @@ ScatterPlot.prototype.initVis = function() {
     vis.yScale = d3.scaleLinear()
         .range([vis.height, 0]);
 
-    vis.colorScale = d3.scaleSequential(d3.interpolateRdYlGn)
-        .domain([-20, 20]);
+    vis.colorScale = d3.scaleThreshold()
+        .range(["#CD6737","#e18946","#e69d49","#d9b46d","#e6c276","#A292D7","#887bb4","#67279b","#4a0073","#320055"])
+        .domain([-20, -15, -10, -5, 0, 5, 10, 15, 20]);
 
     vis.xAxis = d3.axisBottom()
         .scale(vis.xScale);

@@ -58,7 +58,7 @@ queue()
             d.lng = relevantPoint.lng;
         });
 
-        var mapParams = {lat:42.3735695, lng: -71.1211549, zoom:selectedZoom, type: 'mapbox.dark'};
+        var mapParams = {lat:42.3735695, lng: -71.1211549, zoom:selectedZoom, type: 'mapbox.light'};
 
         var mapFullHeight = 340;
         relativeValueMap = new ValueMap('relative-value-map', mapData, mapParams, poiData, mapFullHeight);
@@ -111,6 +111,7 @@ function changeRelativeValueMapRadius(d) {
                 return 'white';
             }
         })
+        .attr('stroke', '#fdfdfd')
     ;
 
     d3.selectAll('.legend-circle-text')
