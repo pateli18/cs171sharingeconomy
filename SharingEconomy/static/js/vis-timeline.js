@@ -43,8 +43,7 @@ StackedChart.prototype.initVis = function() {
             return d.total;
         })]);
 
-    vis.colorScale = d3.scaleOrdinal(d3.schemeCategory10)
-        .domain(vis.categories);
+    vis.colorScale = mapColorScale;
 
     vis.stack = d3.stack()
         .keys(vis.categories)

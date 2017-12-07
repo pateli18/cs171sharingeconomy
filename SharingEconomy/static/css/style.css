@@ -31,7 +31,6 @@ body {
     padding-left: 15px;
     margin-bottom: 15px;
     padding-right: 15px;
-    display: inline-block;
 }
 .container story-text{
     font-family: 'Lato',sans-serif;
@@ -262,11 +261,13 @@ select {
     height: 200px;
 }
 
+.story-bloc {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .story-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 30px;
-    padding-top: 100px;
-    color: #ffffff;
+    font-size: 25px;
 }
 
 .story-animation i {
@@ -286,6 +287,8 @@ select {
 .img-icon {
     height: 100px;
     width: 100px;
+    display: none;
+    position: absolute;
 }
 
 .vote-icon {

@@ -234,7 +234,7 @@ function add_event_boxes(eventBoxes) {
         .append("p")
         .attr("class", "event-box")
         .html(function(d) {
-            return '<strong style="color: ' + timelineChart.colorScale(d['Event type']) + ';">' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>: ' + d.Headline + '<br>';
+            return '<strong style="color: ' + mapColorScale(d['Event type']) + ';">' + d3.timeFormat('%B %Y')(d.fullDate) + '</strong>: ' + d.Headline + '<br>';
         })
         .merge(eventBox)
         .attr('color', 'black');
