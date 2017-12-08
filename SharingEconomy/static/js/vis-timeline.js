@@ -8,11 +8,6 @@ StackedChart = function(_parentElement, _data, _categories) {
     this.initVis();
 }
 
-function padDate(date, numMonths) {
-    date = new Date(date);
-    return date.setMonth(date.getMonth() + numMonths);
-}
-
 StackedChart.prototype.initVis = function() {
     var vis = this;
 
@@ -57,20 +52,14 @@ StackedChart.prototype.initVis = function() {
         .attr("class", "x-axis axis")
         .attr("transform", "translate(0," + vis.height + ")");
 
+    vis.svg.select(".x-axis").call(vis.xAxis);
+
     vis.brush = d3.brushX()
         .extent([[0, 0], [vis.width, vis.height]])
         .on("brush end", filter_timeline_data);
 
     vis.svg.append("g")
         .attr("class", "brush");
-
-    vis.carIcon = vis.svg.append("image")
-        .attr('id', 'car-icon')
-        .attr("href", "static/img/car-icon.png")
-        .attr("width", 40)
-        .attr("height", 40)
-        .attr("x", -40)
-        .attr("y", vis.height - 20);
 
     vis.wrangleData();
 }
@@ -144,8 +133,6 @@ StackedChart.prototype.updateChart = function() {
             return vis.yScale(d[0]) - vis.yScale(d[1]);
         });
 
-    vis.svg.select(".x-axis").transition().duration(200).call(vis.xAxis);
-
     var lineMarker = vis.svg.selectAll('.ax-lines')
         .data([1, 2, 3]);
 
@@ -159,7 +146,7 @@ StackedChart.prototype.updateChart = function() {
         .attr('x2', vis.width)
         .attr('y1', function(d) { return vis.yScale(d);})
         .attr('y2', function(d) { return vis.yScale(d);})
-        .attr('stroke', 'white');
+        .attr('stroke', '#dddddd');
 
     lineMarker.exit().remove();
 

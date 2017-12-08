@@ -1,23 +1,28 @@
 
 var rideChartData;
 var rideVis;
-var valuationCharts = [];
+var driverCharts = [];
 var numPoints;
 var filterDate;
 var maxDate;
 var servicesDomain = ["Yellow Cab","Uber", "Lyft", "Via", "Juno"];
+var servicesDescription = ["NYC Yellow Cabs are those taxis licensed to operate in the City",
+"Uber is the largest ride-sharing company in the US",
+"Lyft is Uber's primary competitior in the US",
+"Via is a ride-sharing service focused on car pooling",
+"Juno is a ride-sharing company headquarted in NYC"]
 var servicesColorRange = ["#e69d49","#050605","#542788","#8073ac","#b2abd2"];
 
 queue()
     .defer(d3.csv, "static/data/rides/number_of_rides_per_day_total_NYC.csv")
     .defer(d3.csv, "static/data/rides/number_of_vehicles.csv")
-    .await(function(error, rideData, valuationData){
+    .await(function(error, rideData, driverData){
 
     rideChartData = [];
 
     numPoints = rideData.length;
 
-    valuationData.forEach(function(d) {
+    driverData.forEach(function(d) {
         d.time = d3.timeParse("%b-%y")(d.time);
     });
 
@@ -34,16 +39,22 @@ queue()
                dataElement.rides = 0;
            }
 
-          var valuationElement = valuationData.filter(function(v) {
+          var driverElement = driverData.filter(function(v) {
               return v.time <= dataElement.time;
           });
 
-          valuationElement = valuationElement[valuationElement.length - 1];
-          dataElement.drivers = +valuationElement[s];
+          driverElement = driverElement[driverElement.length - 1];
+          dataElement.drivers = +driverElement[s];
           if (isNaN(dataElement.drivers)) {
                dataElement.drivers = 0;
            }
 
+           if (dataElement.rides == 0) {
+              dataElement.rides_per_driver = 0;
+           } else {
+              dataElement.rides_per_driver = dataElement.rides / dataElement.drivers;
+           }
+           
            rideChartData.push(dataElement);
         });
 
@@ -54,8 +65,6 @@ queue()
       return a.time - b.time;
     });
 
-    console.log(rideChartData);
-
     rideVis = new RideVis("rides-per-day", rideChartData);
 
     maxDate = d3.max(rideChartData, function(d) {
@@ -64,25 +73,66 @@ queue()
 
     filterDate = maxDate;
 
-    var vehicleDomain = d3.extent(rideChartData, function (d) {
-            return d.drivers;
-        });
-
-    vehicleChartData =  d3.nest()
+    driverChartData =  d3.nest()
         .key(function(d) { return d.service; })
         .entries(rideChartData);
 
-    var vehicleContainer = d3.select('#vehicle-container');
-    vehicleChartData.forEach(function(d) {
-       var circleContainer = vehicleContainer.append("div")
-           .attr('id', 'vehicle-container-' + d.key);
+    driverChartData.sort(function(a, b) {
+      return b.values[b.values.length - 1].rides - a.values[a.values.length - 1].rides; 
+    });
 
-       var vehicleChart = new VehicleVis('vehicle-container-' + d.key, d.values, vehicleDomain, d.key);
-       valuationCharts.push(vehicleChart);
+    var driverChartContainer = d3.select('#driver-chart-container');
+    var driverChartDescription = d3.select('#driver-description-container');
+    driverChartData.forEach(function(d, i) {
+       var chartId = 'driver-container-' + i;
+       driverChartContainer.append("div")
+           .attr('id', chartId);
 
+       $('#' + chartId).mouseenter(driverToolTipShow);
+       $('#' + chartId).mouseleave(driverToolTipHide);
+
+       var driverChart = new DriverVis(chartId, d.values, d.key);
+       driverCharts.push(driverChart);
+
+       driverChartDescription.append("div")
+          .attr('id', 'driver-description-' + i)
+          .attr('class', 'driver-description');
+
+        $('#' + 'driver-description-' + i).html(servicesDescription[i]);
     });
 
 });
+
+function driverToolTipShow(element) {
+  console.log('element');
+  console.log(element);
+   var chart_id = parseInt(element.currentTarget.id.replace('driver-container-',''));
+   var chart = driverCharts[chart_id];
+   chart.svg
+    .append("rect")
+    .attr('class', 'driver-tooltip')
+    .style('fill', 'black')
+    .style('opacity', 0.5)
+    .attr('width', chart.width)
+    .attr('height', chart.height)
+
+  chart.svg
+    .append('text')
+    .attr('class', 'driver-tooltip-text')
+    .attr('fill', 'white')
+    .attr('x', chart.width / 2 - 10)
+    .attr('y', chart.height / 2 + 2)
+    .text(d3.format('.1f')(chart.driverCount));
+}
+
+function driverToolTipHide(element) {
+  var chart_id = parseInt(element.currentTarget.id.replace('driver-container-',''));
+   var chart = driverCharts[chart_id];
+   chart.svg.select('.driver-tooltip-text').remove();
+   chart.svg.select('.driver-tooltip').remove();
+}
+
+
 
 function filter_ride_service_provider() {
   rideVis.wrangleData();
@@ -98,14 +148,21 @@ function animateRideVis(){
     .attr('class', 'blockRect')
     .attr('width', rideVis.width)
     .attr('height', rideVis.height)
-    .attr('fill', 'white');
+    .attr('fill', '#dddddd');
+
+  var prevFilter;
 
   var moveRideCar = setInterval(function() {
 
         blockRect.attr('x', counter)
         .attr('width', rideVis.width - counter);
         var filter = rideVis.xScale.invert(counter);
-        updateValuationCharts(filter);
+
+        if (filter != prevFilter) {
+          updateDriverCharts(filter);
+        }
+
+        prevFilter = filter;
         counter += 1;
         if (counter > rideVis.width) {
             rideVis.svg.selectAll('.blockRect').remove();
@@ -114,9 +171,9 @@ function animateRideVis(){
     }, 1);
 };
 
-function updateValuationCharts(filter) {
+function updateDriverCharts(filter) {
   filterDate = filter;
-    valuationCharts.forEach(function(d) {
+    driverCharts.forEach(function(d) {
         d.wrangleData();
     });
 }
@@ -146,7 +203,7 @@ function lineToolTipShow() {
           .text(d3.format(",.0f")(dA.rides));
     });
 
-    updateValuationCharts(x0);
+    updateDriverCharts(x0);
 };
 
 function lineToolTipHide() {
@@ -162,5 +219,5 @@ function lineToolTipHide() {
           .text('');
     });
 
-    updateValuationCharts(maxDate);
+    updateDriverCharts(maxDate);
 };

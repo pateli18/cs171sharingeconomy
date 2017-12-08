@@ -1,7 +1,6 @@
 
 var textTypeInterval = 50;
 var basePause = 1000;
-var storyIndices = [2, 4, 6, 8];
 var slideRun = {2:true, 3:true, 4:true, 5:true, 6:true, 8:true};
 
 $(function() {
@@ -40,19 +39,37 @@ $(function() {
                     }
 
                 }
-
-
-                if (storyIndices.indexOf(index) > - 1) {
-                    if (slideRun[index]) {
-                        slideRun[index] = false;
-                        setTimeout(addStoryElements(index), 5000);
-                    }
-                }
                 
                 if (index === 3) {
                     if (slideRun[index]) {
                         slideRun[index] = false;
                         setTimeout(timeline_button_click, 1000);
+                    }
+                }
+
+                if (index == 4) {
+                    if (slideRun[index]) {
+                        slideRun[index] = false;
+                        var timeDelay = basePause;
+                        setTimeout(function() {moveItem('driver-decision-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var driverDecisionText = 'John recently lost his job and is looking for work.';
+                        setTimeout(function() {typeText('driver-decision-description', driverDecisionText); }, timeDelay);
+
+                        timeDelay += basePause + driverDecisionText.length * textTypeInterval;
+                        setTimeout(function() {moveItem('driver-car-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var driverCarText = 'He wonders if he should work for a taxi company or use his own car to drive for Uber or another ride-sharing service.';
+                        setTimeout(function() {typeText('driver-car-description', driverCarText); }, timeDelay);
+
+                        timeDelay += basePause + driverCarText.length * textTypeInterval;
+                        setTimeout(function() {moveItem('driver-nyc-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var driverNycText = 'He takes a closer look at the largest taxi market in the US, New York City.';
+                        setTimeout(function() {typeText('driver-nyc-description', driverNycText); }, timeDelay);
                     }
                 }
 
@@ -62,12 +79,35 @@ $(function() {
                         setTimeout(animateRideVis, 1000);
                     }
                 }
+
+                if (index == 6) {
+                    if (slideRun[index]) {
+                        slideRun[index] = false;
+                        var timeDelay = basePause;
+                        setTimeout(function() {moveItem('consumer-decision-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var consumerDecisionText = 'Tansaya is a student at Harvard University.';
+                        setTimeout(function() {typeText('consumer-decision-description', consumerDecisionText); }, timeDelay);
+
+                        timeDelay += basePause + consumerDecisionText.length * textTypeInterval;
+                        setTimeout(function() {moveItem('consumer-question-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var consumerQuestionText = 'She needs to get to the airport and is deciding whether to take an Uber or taxi.';
+                        setTimeout(function() {typeText('consumer-question-description', consumerQuestionText); }, timeDelay);
+
+                        timeDelay += basePause + consumerQuestionText.length * textTypeInterval;
+                        setTimeout(function() {moveItem('consumer-money-icon', 0, 50, 100)}, timeDelay);
+
+                        timeDelay += 500;
+                        var consumerMoneyText = 'She examines the prices to help make a decision.';
+                        setTimeout(function() {typeText('consumer-money-description', consumerMoneyText); }, timeDelay);
+                    }
+                }
             },
 
             onLeave: function(index, nextIndex, direction){
-                if (storyIndices.indexOf(index) > - 1) {
-
-                }
                 if (index === 3) {
                     timeline_reset_button_click();
                 }
@@ -115,6 +155,11 @@ function moveItem(elementId, startPosition, endPosition, timeInterval) {
         }
     }, 1);
 
+}
+
+function padDate(date, numMonths) {
+    date = new Date(date);
+    return date.setMonth(date.getMonth() + numMonths);
 }
 
 

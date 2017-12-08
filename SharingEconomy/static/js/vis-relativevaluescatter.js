@@ -33,7 +33,7 @@ ScatterPlot.prototype.initVis = function() {
         .range([vis.height, 0]);
 
     vis.colorScale = d3.scaleThreshold()
-        .range(["#CD6737","#e18946","#e69d49","#d9b46d","#e6c276","#A292D7","#887bb4","#67279b","#4a0073","#320055"])
+        .range(["#CD6737","#e18946","#e69d49","#d9b46d","#e6c276","#A292D7","#887bb4","#67279b","#4a0073"])
         .domain([-20, -15, -10, -5, 0, 5, 10, 15, 20]);
 
     vis.xAxis = d3.axisBottom()
@@ -64,34 +64,33 @@ ScatterPlot.prototype.initVis = function() {
         .offset([-8, 0]);
 
     vis.svg.append("g")
-        .attr("class", "legendLinear")
+        .attr("class", "legendQuant")
         .attr("transform", "translate(" + (vis.width / 4) + "," + (0 - 50) + ")");
 
     vis.legendLinear = d3.legendColor()
         .shapeWidth(30)
-        .cells(10)
-        .labelFormat(d3.format("$.0f"))
+        .labels(['-$20', '-$15', '-$10', '-$5', '$0', '+$5', '+$10', '+$15', '+$20'])
         .orient('horizontal')
         .scale(vis.colorScale);
 
-    vis.svg.select(".legendLinear")
+    vis.svg.select(".legendQuant")
         .call(vis.legendLinear);
 
     vis.svg.append("text")
         .attr('class', 'relative-value-legend-label')
-        .attr("transform", "translate(" + (vis.width / 2.6) + "," + (0 - 60) + ")")
+        .attr("transform", "translate(" + 252 + "," + (0 - 60) + ")")
         .text('Uber vs. Taxi Price Differential')
         .attr('font-weight', 'bold');
 
     vis.svg.append("text")
         .attr('class', 'relative-value-legend-label')
-        .attr("transform", "translate(" + (vis.width / 1.40) + "," + (0 - 40) + ")")
+        .attr("transform", "translate(" + 470 + "," + (0 - 40) + ")")
         .attr('font-style', 'italic')
         .text('Uber Cheaper');
 
     vis.svg.append("text")
         .attr('class', 'relative-value-legend-label')
-        .attr("transform", "translate(" + (vis.width / 8) + "," + (0 - 40) + ")")
+        .attr("transform", "translate(" + 115 + "," + (0 - 40) + ")")
         .attr('font-style', 'italic')
         .text('Taxi Cheaper');
 
@@ -99,11 +98,16 @@ ScatterPlot.prototype.initVis = function() {
         .attr('class', 'd3-tip')
         .offset([-8, 0]);
 
-    vis.svg.append("image")
-        .attr("xlink:href", "static/img/harvard-logo.png")
-        .attr("width", 30)
-        .attr("height", 30)
-        .attr("transform", "translate(" + -18 + "," + (vis.height - 12) + ")");
+    vis.svg.append("circle")
+        .attr('r', 5)
+        .attr('fill', 'black')
+        .attr("transform", "translate(" + 0 + "," + vis.height + ")");
+
+    vis.svg.append("text")
+        .attr("transform", "translate(" + 5 + "," + vis.height + ")")
+        .attr('fill', 'black')
+        .attr('font-size', '11px')
+        .text('Harvard Square');
 
     vis.wrangleData();
 
@@ -155,10 +159,9 @@ ScatterPlot.prototype.updatePlot = function() {
     })]);
 
     vis.toolTip.html(function(d) {
-        console.log('working');
         return '<table>'
             + '<tr>'
-            + '<td>Price Differential</td><td style="color: ' + vis.colorScale(d.price_differential)  + ';">' + d3.format("($.2f")(d.price_differential)
+            + '<td>Price Differential</td><td style="background-color: ' + vis.colorScale(d.price_differential)  + '; color:white;">' + d3.format("($.2f")(d.price_differential)
             + '</td>'
             + '</tr>'
             + '<tr>'

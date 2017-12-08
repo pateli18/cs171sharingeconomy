@@ -7,6 +7,7 @@ ValueMap = function(_parentElement, _data, _mapParams, _poiData, _fullHeight) {
     this.mapParams = _mapParams;
     this.poiData = _poiData;
     this.fullHeight = _fullHeight;
+    console.log(this.poiData);
 
     this.initVis();
 }
@@ -30,17 +31,6 @@ ValueMap.prototype.initVis = function() {
         accessToken: 'pk.eyJ1IjoicGF0ZWxpMTgiLCJhIjoiY2o5cnNsc2dxMzFwNTJ3bGdrZzdnM3YzcSJ9.aC2VGgP88galycKJ--ApbA'
     }).addTo(vis.baseMap);
 
-    vis.harvardIcon = L.icon({
-        iconUrl: 'static/img/harvard-logo.png',
-
-        iconSize:     [38, 38], // size of the icon
-        iconAnchor:   [17, 17] // point of the icon which will correspond to marker's location
-    });
-
-    L.marker([vis.mapParams.lat, vis.mapParams.lng], {icon: vis.harvardIcon}).addTo(vis.baseMap);
-
-    vis.poiLayer = L.layerGroup().addTo(vis.baseMap);
-
     L.svg({clickable:true}).addTo(vis.baseMap);
 
     vis.svg = d3.select("#" + vis.parentElement)
@@ -48,6 +38,11 @@ ValueMap.prototype.initVis = function() {
         .attr("pointer-events", "auto");
 
     vis.g = vis.svg.select("g");
+
+    var harvardIndex = vis.data.length + 1
+    var harvardData = {'lat':42.3735695, 'lng':-71.1211549, 'poi':true, 'index':harvardIndex, 'name':'Harvard Square'};
+    vis.data.push(harvardData);
+    vis.poiData.push(harvardData);
 
     vis.mapPoint = vis.g.selectAll(".relative-value-map-point")
         .data(vis.data)
@@ -57,8 +52,22 @@ ValueMap.prototype.initVis = function() {
         .attr('id', function(d) {
             return 'relative-value-map-point-' + d.index;
         })
-        .attr('fill', 'none')
+        .attr('fill', function(d) {
+            if (d.index === harvardIndex) {
+                return 'white';
+            } else {
+                return 'none';
+            }
+        })
         .attr('r', 8);
+
+    vis.mapLabel = vis.g.selectAll(".relative-value-map-label")
+        .data(vis.data)
+        .enter()
+        .append('text')
+        .attr('class', 'relative-value-map-label')
+        .style('font-size', '9px')
+        .attr('fill', 'white');
 
     vis.wrangleData();
 }
@@ -75,11 +84,9 @@ ValueMap.prototype.wrangleData = function() {
         d.price_differential = d.taxi_price - d[vis.uberType + '_price'] * vis.surge;
     });
 
+    vis.poi = {};
     vis.poiData.forEach(function(d) {
-        var relevantPoint = vis.displayData[d.index];
-        d.distance = relevantPoint.distance;
-        d.duration = relevantPoint.duration;
-        d.price_differential = relevantPoint.price_differential;
+        vis.poi[d.index] = d.name;
     });
 
     vis.updateValueMap();
@@ -97,15 +104,34 @@ ValueMap.prototype.updateValueMap = function() {
                 return "translate("+
                     vis.baseMap.latLngToLayerPoint([d.lat, d.lng]).x +","+
                     vis.baseMap.latLngToLayerPoint([d.lat, d.lng]).y +")";
+            })
+            .attr("stroke", function(d) {
+                if (d.poi) {
+                    return relativeValuePlot.colorScale(d.price_differential);
+                } else {
+                    return 'none';
+                }
+            })
+            .style("stroke-width", function(d) {
+                if (d.poi) {
+                    return "5px";
+                } else {
+                    return 'none';
+                }
             });
 
-        vis.poiData.forEach(function(d) {
-            var marker = L.marker([d.lat, d.lng])
-                .bindPopup("<strong>" + d.name + "</strong><br>"
-                    + "<span>Price Differential: " + d3.format("($.2f")(d.price_differential) + " </span><br>"
-                    + "<span>Duration: " + d.duration + " min</span><br>"
-                    + "<span>Distance: " + d.distance + "mi</span><br>");
-            vis.poiLayer.addLayer(marker);
-        });
+        d3.selectAll(".relative-value-map-label")
+            .attr("transform", function(d) {
+                return "translate("+
+                    (vis.baseMap.latLngToLayerPoint([d.lat, d.lng]).x + 5) +","+
+                    (vis.baseMap.latLngToLayerPoint([d.lat, d.lng]).y - 3) +")";
+            })
+            .text(function(d) {
+                if (d.poi) {
+                    return vis.poi[d.index];
+                } else {
+                    return '';
+                }
+            });
     });
 }

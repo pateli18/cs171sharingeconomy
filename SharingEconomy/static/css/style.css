@@ -176,19 +176,8 @@ select {
     left: 0;
 }
 
-.legendSize circle {
-    fill: white;
-    stroke: #a2b894;
-}
-
 .control-box {
     border: solid 3px #8b0000;
-}
-
-.legendTitle {
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 12px;
 }
 
 #case-count {
@@ -218,12 +207,13 @@ select {
 }
 
 .scatter-point:hover {
-    stroke: none;
+    stroke: black;
     stroke-width: 5px;
+    opacity: 1;
 }
 
 .legend-circle:hover {
-    fill: none;
+    fill: #c0c0c8;
 }
 
 .interaction-header {
@@ -257,12 +247,6 @@ select {
     border: solid 1px #c0c0c8;
 }
 
-.title-banner {
-    background-image: url("../img/title-banner.jpg");
-    background-size: contain;
-    height: 200px;
-}
-
 .story-bloc {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -272,9 +256,11 @@ select {
     font-size: 25px;
 }
 
-.story-animation i {
+.story-icon {
     font-size: 100px;
     position: absolute;
+    display: none;
+    outline: 1px solid transparent;
 }
 
 .icon-container {
@@ -324,4 +310,9 @@ select {
 .overlay {
   fill: none;
   pointer-events: all;
+}
+
+.driver-description {
+    height: 100px;
+    padding-top: 30px;
 }

@@ -58,7 +58,7 @@ queue()
             d.lng = relevantPoint.lng;
         });
 
-        var mapParams = {lat:42.3735695, lng: -71.1211549, zoom:selectedZoom, type: 'mapbox.light'};
+        var mapParams = {lat:42.3735695, lng: -71.1211549, zoom:selectedZoom, type: 'mapbox.dark'};
 
         var mapFullHeight = 340;
         relativeValueMap = new ValueMap('relative-value-map', mapData, mapParams, poiData, mapFullHeight);
@@ -85,7 +85,8 @@ function initializeElements() {
 
 function updateRelativeValue() {
     relativeValuePlot.wrangleData(selectedRadius);
-
+    relativeValueMap.wrangleData();
+    
     var uberType = $('#relative-value-uber-type').find(':selected').val();
     $('#service-description').html(uberDescriptions[uberType]);
 }
@@ -108,11 +109,10 @@ function changeRelativeValueMapRadius(d) {
             if (d.map_radius <= selectedRadius) {
                 return '#09091a';
             } else {
-                return 'white';
+                return '#dddddd';
             }
         })
-        .attr('stroke', '#fdfdfd')
-    ;
+        .attr('stroke', '#09091a');
 
     d3.selectAll('.legend-circle-text')
         .text(function(d) {
@@ -158,15 +158,13 @@ function generateRelativeValueMapToggle() {
         .attr('r', function(d) {
             return d.map_radius * 10;
         })
-        .attr('stroke', '#09091a')
         .attr('fill', function(d) {
             if (d.map_radius <= selectedRadius) {
                 return '#09091a'
             } else {
-                return 'white';
+                return '#dddddd';
             }
-        })
-        .attr('stroke-width', '2px');
+        });
 
     legendCircles.exit().remove();
 

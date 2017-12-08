@@ -22,6 +22,7 @@
 				<div class="mega-header" style="margin-top: 300px; font-size: 60px;">Who Wins in the Sharing Economy?</div><br>
 			</div>
 		</section>
+
 		<section class="section">
 			<div class="section-header">What is the Sharing Economy?</div>
 			<div class="container">
@@ -51,6 +52,7 @@
 				</div>
 			</div>
 		</section>
+
 		<section class="section">
 			<div class="section-header">The Rise of Uber</div>
 			<div class="col-md-3" style="margin-left: 5px">
@@ -87,8 +89,144 @@
 		</section>
 
 		<section class="section">
-			<div class="section-header">Uber's Drivers: How Much Can They Earn?</div><br>
-			<div id="story-container-2" class="container story-text"><br><br></div>
+			<div class="section-header">Driving for Uber</div><br>
+			<div class="container">
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<i id="driver-decision-icon" class="fa fa-male story-icon"></i>
+					</div>
+					<div class="col-md-10">
+						<div id="driver-decision-description" class="story-text"></div>
+					</div>
+				</div>
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<img src="static/img/car-icon.png" id="driver-car-icon" class="img-icon"/>
+					</div>
+					<div class="col-md-10">
+						<div id="driver-car-description" class="story-text"></div>
+					</div>
+				</div>
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<img src="static/img/nyc.svg" id="driver-nyc-icon" class="img-icon"/>
+					</div>
+					<div class="col-md-10">
+						<div id="driver-nyc-description" class="story-text"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Driver's Decision: Ride-Sharing vs. Taxis in NYC</div>
+			<div class="row">
+				<div class="col-md-8" style="padding-left: 55px;">
+					<select class="form-control interaction-header" id="ride-service-provider" onchange="filter_ride_service_provider()">
+						<option value="All">All Service Providers</option>
+						<option value="Yellow Cab">Yellow Cab</option>
+						<option value="Uber">Uber</option>
+						<option value="Lyft">Lyft</option>
+						<option value="Via">Via</option>
+						<option value="Juno">Juno</option>
+				</select>
+				</div>
+				<div class="col-md-3" style="text-align: center;">
+					<h4 id="name" class="info-section-header">Rides Per Driver</h4>
+					<div><div style="display: inline-block; fill: none; border: 1px solid black; height: 10px; width: 14px;"></div><span><strong> = 1 Ride</strong></span></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div id="rides-per-day"></div>
+				</div>
+				<div class="col-md-1" id ="driver-chart-container">
+				</div>
+				<div class="col-md-2" id ="driver-description-container">
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Riding with Uber</div>
+			<div class="container">
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<i id="consumer-decision-icon" class="fa fa-female story-icon"></i>
+					</div>
+					<div class="col-md-10">
+						<div id="consumer-decision-description" class="story-text"></div>
+					</div>
+				</div>
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<i id="consumer-question-icon" class="fa fa-question-circle story-icon"></i>
+					</div>
+					<div class="col-md-10">
+						<div id="consumer-question-description" class="story-text"></div>
+					</div>
+				</div>
+				<div class="row story-bloc">
+					<div class="col-md-2">
+						<i id="consumer-money-icon" class="fa fa-money story-icon"></i>
+					</div>
+					<div class="col-md-10">
+						<div id="consumer-money-description" class="story-text"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Consumer's Choice: Uber vs. Taxi</div>
+			<div class="row">
+				<div class="col-md-7">
+					<div id="relative-value-plot"></div>
+				</div>
+				<div class="col-md-5">
+					<div class="col-md-7">
+						<div id="relative-value-map"></div>
+					</div>
+					<div class="col-md-4">
+						<div style="padding-left: 30px; margin-top: 60px;">
+							<span style="background-color: #09091a; color: white;
+							padding: 5px;">Select Area Radius</span>
+						</div>
+						<div id="relative-value-map-legend"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-left: 80px; margin-top: 40px;">
+				<div class="col-md-4" >
+					<select class="form-control interaction-header" id="relative-value-uber-type" onchange="updateRelativeValue()">
+						<option value="uber_pool">Uber Pool</option>
+						<option value="uber_x">Uber X</option>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<div style="border-radius: 4px; padding-left: 5px; display: inline-block; width: 380px; height: 34px; background-color: #09091a; padding-top: 5px;">
+						<span id="surge-amount" class="interaction-header">Surge Pricing: None</span>
+						<div id="surge-slider"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-left: 80px;">
+				<div class="col-md-4">
+					<div id="service-description" class="info-description"></div>
+				</div>
+				<div class="col-md-6">
+					<div id="surge-description" class="info-description">In times of high demand for rides, Uber imposes "surge pricing" to encourage
+						more drivers to meet the demand. The pricing is calculated by multiplying the base price by a specific
+						amount which increases with demand.<br>
+						<u>Move the slider to see how the price differential changes with surge pricing</u></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Uber's Rivals: How the Ride-Sharing Services Affect the Incumbent Taxi Services?
+			</div>
+			<div id="story-container-4" class="container story-text"></div>
 		</section>
 
 		<section class="section">
@@ -139,89 +277,6 @@
 						</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Uber's Consumers: Have the Consumers Enjoyed Cheaper Rides?</div>
-			<div id="story-container-6" class="container story-text"></div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Consumer's Choice: Uber vs. Taxi</div>
-			<div class="row">
-				<div class="col-md-7">
-					<div id="relative-value-plot"></div>
-				</div>
-				<div class="col-md-5">
-					<div class="col-md-7">
-						<div id="relative-value-map"></div>
-					</div>
-					<div class="col-md-4">
-						<div style="padding-left: 20px; margin-top: 60px;">
-							<span>Select Area Radius</span>
-						</div>
-						<div id="relative-value-map-legend"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row" style="margin-left: 80px; margin-top: 40px;">
-				<div class="col-md-4" >
-					<select class="form-control interaction-header" id="relative-value-uber-type" onchange="updateRelativeValue()">
-						<option value="uber_pool">Uber Pool</option>
-						<option value="uber_x">Uber X</option>
-					</select>
-				</div>
-				<div class="col-md-6">
-					<div style="border-radius: 4px; padding-left: 5px; display: inline-block; width: 380px; height: 34px; background-color: #09091a; padding-top: 5px;">
-						<span id="surge-amount" class="interaction-header">Surge Pricing: None</span>
-						<div id="surge-slider"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row" style="margin-left: 80px;">
-				<div class="col-md-4">
-					<div id="service-description" class="info-description"></div>
-				</div>
-				<div class="col-md-6">
-					<div id="surge-description" class="info-description">In times of high demand for rides, Uber imposes "surge pricing" to encourage
-						more drivers to meet the demand. The pricing is calculated by multiplying the base price by a specific
-						amount which increases with demand.<br>
-						<strong>Move the slider to see how the price differential changes with surge pricing</strong></div>
-				</div>
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Uber's Rivals: How the Ride-Sharing Services Affect the Incumbent Taxi Services?
-			</div>
-			<div id="story-container-4" class="container story-text"></div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Ridership Fight: Ride-Sharing Services vs. Taxi in New York City</div>
-			<div class="row">
-				<div class="col-md-8">
-					<select class="form-control interaction-header" id="ride-service-provider" onchange="filter_ride_service_provider()">
-						<option value="All">All Service Providers</option>
-						<option value="Yellow Cab">Yellow Cab</option>
-						<option value="Uber">Uber</option>
-						<option value="Lyft">Lyft</option>
-						<option value="Via">Via</option>
-						<option value="Juno">Juno</option>
-				</select>
-				</div>
-				<div class="col-md-3">
-					<h4 id="name" class="info-section-header" style="text-align: center;">Number of Unique Vehicle Dispatched by Services</h4>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8">
-					<div id="rides-per-day"></div>
-				</div>
-				<div class="col-md-3" id ="vehicle-container" style="text-align: center;">
-
 				</div>
 			</div>
 		</section>
@@ -318,8 +373,7 @@
 	<script src="../static/js/vis-timeline.js"></script>
 	<script src="../static/js/handler-rideslide.js"></script>
 	<script src="../static/js/vis-rideline.js"></script>
-	<script src="../static/js/vis-ridevaluation.js"></script>
-	<script src="../static/js/vis-rides_vehicle.js"></script>
+	<script src="../static/js/vis-ridesperdriver.js"></script>
 	<script src="../static/js/handler-relativevalueslide.js"></script>
 	<script src="../static/js/vis-relativevaluemap.js"></script>
 	<script src="../static/js/vis-relativevaluescatter.js"></script>

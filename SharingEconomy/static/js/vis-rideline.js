@@ -11,7 +11,7 @@ RideVis = function(_parentElement, _rideData){
 
 RideVis.prototype.initVis = function() {
     var vis = this;
-    vis.margin = {top: 20, right: 150, bottom: 20, left: 60};
+    vis.margin = {top: 20, right: 150, bottom: 20, left: 100};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
@@ -43,7 +43,7 @@ RideVis.prototype.initVis = function() {
         .attr("class", "x-axis axis")
         .attr("transform", "translate(0," + vis.height + ")")
         .append('text')
-        .attr('transform', "translate(" + (vis.width - 15) + ",-5)")
+        .attr('transform', "translate(" + (vis.width - 20) + ",-5)")
         .attr('class', 'axis-label')
         .text('Month');
 

@@ -19,6 +19,7 @@ var carDims = [40, 40];
 var pathPosition = -carDims[0];
 var prevDataLength = 0;
 var moveCar;
+var carIcon;
 
 queue()
     .defer(d3.json, 'static/data/timeline/world-110m.json')
@@ -128,6 +129,14 @@ queue()
         timelineChart = new StackedChart('timeline', timelineByEventData, eventCategories);
         timelineChart.svg.call(timelineChart.brush).call(timelineChart.brush.move, timelineChart.xScale.range());
 
+        carIcon = timelineChart.svg.append("image")
+                    .attr('id', 'car-icon')
+                    .attr("href", "static/img/car-icon.png")
+                    .attr("width", 40)
+                    .attr("height", 40)
+                    .attr("x", -40)
+                    .attr("y", timelineChart.height - 20);
+
         add_events(timelineData);
         add_event_boxes(timelineData);
 
@@ -154,7 +163,7 @@ function timeline_reset_button_click() {
     $('#timeline-button-label').html(' Play');
     pathPosition = -carDims[0];
     prevDataLength = 0;
-    timelineChart.carIcon.attr("x", pathPosition);
+    carIcon.attr("x", pathPosition);
     add_events(timelineData);
     add_event_boxes(timelineData);
 
@@ -163,7 +172,7 @@ function timeline_reset_button_click() {
 function run_event_timer() {
 
     var totalPathLength = timelineChart.width;
-    var totalPathTime = 5 * 1000;
+    var totalPathTime = 3 * 1000;
     var pathIncrement = totalPathLength / totalPathTime;
     if (prevDataLength === 0) {
         add_events([]);
@@ -172,7 +181,7 @@ function run_event_timer() {
 
     moveCar =  setInterval(function() {
         pathPosition += pathIncrement;
-        timelineChart.carIcon.attr("x", pathPosition);
+        carIcon.attr("x", pathPosition);
         var currentDate = timelineChart.xScale.invert(pathPosition + carDims[0]);
         var chartData = timelineData.filter(function (d) {
             return d.fullDate <= currentDate;
@@ -200,7 +209,11 @@ function add_events(eventData) {
     mapSVG.call(mapToolTip);
 
     var eventCircle = mapSVG.selectAll('.event-circle')
-        .data(eventData);
+        .data(eventData, function(d) {
+            return d.index;
+        });
+
+    eventCircle.exit().remove();
 
     eventCircle.enter()
         .append("circle")
@@ -217,11 +230,9 @@ function add_events(eventData) {
             return "translate(" + mapProjection([d.Lng, d.Lat]) + ")";
         })
         .transition()
-        .duration(100)
+        .duration(500)
         .style('opacity', 1)
         .attr('r', 5);
-
-    eventCircle.exit().remove();
 
 }
 
@@ -266,6 +277,7 @@ function event_mouse_over(event) {
         .remove();
 
     d3.select('#timeline-event-box').html(event.Details);
+    filter_legend(event['Event type']);
 }
 
 function event_mouse_out(event) {
@@ -280,6 +292,7 @@ function event_mouse_out(event) {
         });
     d3.select('#timeline-event-box').html("");
     add_event_boxes(timelineData);
+    unfilter_legend();
 }
 
 function filter_timeline_data() {
@@ -301,13 +314,55 @@ function filter_timeline_data() {
     }
 
     var filterVal = $('#timeline-event-type').val();
+    unfilter_legend();
     if (filterVal != 'All') {
         timelineData = timelineData.filter(function(d) {
             return d['Event type'] === filterVal;
         });
+        filter_legend(filterVal);
     }
 
     add_events(timelineData);
     add_event_boxes(timelineData);
     timelineChart.wrangleData();
+}
+
+function filter_legend(eventType) {
+    var legendCells = d3.select('#event-legend')
+                        .select('.legendCells')
+                        .selectAll('.cell');
+
+    legendCells.select('.label')
+        .style('fill', function(d) {
+            if (d != eventType) {
+                return 'lightgrey';
+            } else {
+                return 'black';
+            }
+        });
+
+    legendCells.select('.swatch')
+        .style('fill', function(d) {
+            if (d != eventType) {
+                return 'lightgrey';
+            } else {
+                return mapColorScale(d);
+            }
+        });
+}
+
+function unfilter_legend() {
+    var legendCells = d3.select('#event-legend')
+                        .select('.legendCells')
+                        .selectAll('.cell');
+
+    legendCells.select('.label')
+        .style('fill', function(d) {
+            return 'black';
+        });
+
+    legendCells.select('.swatch')
+        .style('fill', function(d) {
+            return mapColorScale(d);
+        });
 }
