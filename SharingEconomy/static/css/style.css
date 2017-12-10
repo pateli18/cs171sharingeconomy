@@ -32,24 +32,27 @@ body {
     margin-bottom: 15px;
     padding-right: 15px;
 }
-.container story-text{
-    font-family: 'Lato',sans-serif;
-    color: black;
-}
-#row story-text{
-    font-family: 'Lato',sans-serif;
-    color: black;
-}
+
 #section-intro{
-    background-image: url(../img/bw_bg2.png);
+    background-image: url(../img/bw_bg2.jpg);
     background-size: cover;
     padding: 0;
 }
+
 #section-lastpart{
-    background-image: url(../img/bw_bg.png);
+    background-image: url(../img/bw_bg.jpg);
     background-size: cover;
     padding: 0;
 }
+
+#section-lastpart * {
+    color: white;
+}
+
+#section-lastpart a {
+    color: #f8c908;
+}
+
 .info-section-header {
     color: black;
     font-size: 24px;
@@ -59,51 +62,13 @@ body {
     display: inline-block;
 }
 
-.section-subheader {
-    font-size: 18px;
-    color: #ffffff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-top: solid 1px #c0c0c8;
-    border-bottom: solid 1px #c0c0c8;
-}
-
-.text-bloc {
-    color: black;
-    font-size: 18px;
-    font-style: italic;
-}
-
-.metric-bloc {
-    text-align: center;
-    border-left: solid 1px grey;
-    height: 200px;
-    margin-bottom: 40px;
-}
-
-.metric-bloc h2 {
-    color: #8b0000;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.description-bloc {
-    color: grey;
-    font-size: 20px;
-}
-
-.control-header {
-    font-weight: bold;
-}
-a{
-    color: #f8c908;
-}
 .axis-label {
     fill: grey;
     font-family: 'Lato',sans-serif;
     font-size: 15px;
     text-transform: capitalize;
 }
+
 .x-axis text {
     font-family: 'Lato',sans-serif;
     font-size: 13px;
@@ -113,6 +78,7 @@ a{
     font-family: 'Lato',sans-serif;
     font-size: 13px;
 }
+
 .poi-label {
     fill: black;
     font-size: 11px;
@@ -121,17 +87,6 @@ a{
 .relative-value-legend-label {
     fill: black;
     font-size: 11px;
-}
-
-.metric-count {
-    text-align: center;
-    border: solid 1px grey;
-    margin-top: 10px;
-}
-
-.footnote {
-    color: black;
-    font-size: 8px;
 }
 
 select {
@@ -146,18 +101,13 @@ select {
     border-radius: 2px;
 }
 
-.d3-tip-timeline {
-    line-height: 1;
-    padding: 12px;
-    background: black;
-    color: #fff;
-    border-radius: 2px;
+.d3-tip.timeline {
     width: 200px;
-    font-size: 9px;
+    font-size: 12px;
 }
 
 /* Creates a small triangle extender for the tooltip */
-.d3-tip:after, .d3-tip-timeline:after {
+.d3-tip:after {
     box-sizing: border-box;
     display: inline;
     font-size: 10px;
@@ -170,22 +120,10 @@ select {
 }
 
 /* Style northward tooltips differently */
-.d3-tip.n:after, .d3-tip-timeline.n:after {
+.d3-tip.n:after {
     margin: -1px 0 0 0;
     top: 100%;
     left: 0;
-}
-
-.control-box {
-    border: solid 3px #8b0000;
-}
-
-#case-count {
-    height: 50px;
-}
-
-#scatter-plot-controls {
-    margin-left: 5px;
 }
 
 .leaflet-zoom-animated circle{
@@ -195,10 +133,6 @@ select {
 .d3-tip td {
     font-size: 10px;
     padding: 2px;
-}
-
-.map-circle {
-    opacity: .2;
 }
 
 .event-circle {
@@ -242,9 +176,16 @@ select {
     background-color: #c0c0c8;
 }
 
-#surge-slider span {
+#surge-slider span,
+#income-slider span {
     background-color: #09091a;
     border: solid 1px #c0c0c8;
+}
+
+#income-slider {
+    height: 320px;
+    display: inline-block;
+    background-color: #c0c0c8;
 }
 
 .story-bloc {
@@ -263,15 +204,6 @@ select {
     outline: 1px solid transparent;
 }
 
-.icon-container {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    outline: 1px solid transparent;
-    left: inherit;
-    color: black;
-}
-
 .img-icon {
     height: 100px;
     width: 100px;
@@ -281,8 +213,6 @@ select {
 
 .vote-icon {
     text-align: center;
-    font-size: 100px;
-    color: #ebebeb;
 }
 
 .vote-label {
@@ -303,10 +233,6 @@ select {
     margin-bottom: 10px;
 }
 
-.income-bar:hover {
-    fill: grey;
-}
-
 .overlay {
   fill: none;
   pointer-events: all;
@@ -315,4 +241,42 @@ select {
 .driver-description {
     height: 100px;
     padding-top: 30px;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success,
+.btn-win:hover {
+    background-color: #8073ac;
+    border-color: #8073ac;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger,
+.btn-lose:hover {
+    background-color: #feb24c;
+    border-color: #feb24c;      
+}
+
+.income-description {
+    height: 60px;
+    padding-right: 10px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+#income-slider-label {
+    position: absolute;
+    background-color: black;
+    color:white;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#fp-nav ul li a span {
+    background: white;
 }

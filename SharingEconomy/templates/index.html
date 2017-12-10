@@ -8,11 +8,11 @@
 	<!-- Load Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto|Titillium+Web|Inconsolata|Lato" rel="stylesheet" type='text/css'>
 	<link rel="icon", href="../static/img/car-icon.png">
-	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/css/libraries/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../static/css/jquery.fullpage.css">
-	<link rel="stylesheet" href="../static/css/jquery-ui.min.css">
-	<link rel="stylesheet" href="../static/css/leaflet.css">
+	<link rel="stylesheet" href="../static/css/libraries/jquery.fullpage.css">
+	<link rel="stylesheet" href="../static/css/libraries/jquery-ui.min.css">
+	<link rel="stylesheet" href="../static/css/libraries/leaflet.css">
 	<link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
@@ -89,7 +89,7 @@
 		</section>
 
 		<section class="section">
-			<div class="section-header">Driving for Uber</div><br>
+			<div class="section-header">Joining the Sharing Economy</div><br>
 			<div class="container">
 				<div class="row story-bloc">
 					<div class="col-md-2">
@@ -119,7 +119,7 @@
 		</section>
 
 		<section class="section">
-			<div class="section-header">Driver's Decision: Ride-Sharing vs. Taxis in NYC</div>
+			<div class="section-header">Driver's Dilemma: Ride-Sharing or Taxis</div>
 			<div class="row">
 				<div class="col-md-8" style="padding-left: 55px;">
 					<select class="form-control interaction-header" id="ride-service-provider" onchange="filter_ride_service_provider()">
@@ -217,170 +217,196 @@
 				<div class="col-md-6">
 					<div id="surge-description" class="info-description">In times of high demand for rides, Uber imposes "surge pricing" to encourage
 						more drivers to meet the demand. The pricing is calculated by multiplying the base price by a specific
-						amount which increases with demand.<br>
-						<u>Move the slider to see how the price differential changes with surge pricing</u></div>
+						amount which increases with demand. <strong><i>Move the slider to see how the price differential changes with surge pricing</i></strong></div>
 				</div>
 			</div>
 		</section>
 
 		<section class="section">
-			<div class="section-header">Uber's Rivals: How the Ride-Sharing Services Affect the Incumbent Taxi Services?
+			<div class="section-header">Driving for Uber
 			</div>
-			<div id="story-container-4" class="container story-text"></div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Worker's Decision: Annual Earnings from Driving for Uber</div>
-			<div class="row">
-				<div class="col-md-8">
-					<div id="driver-income-chart">
-					</div>
-				</div>
-				<div class="col-md-3">
-					<h4 class="info-section-header">Annual earnings estimator</h4>
-					<p>Select your target annual pre-tax income to see how much you'll need to drive with Uber and where the money goes.
-						Remember, this is pre-tax and you're not a full-time employee, so healthcare & savings is on you!</p>
-					<!-- Select box to choose the ranking type -->
-					<form class="form-inline">
-						<div class="form-group">
-							<label for="dataType">Target Annual Income</label>
-							<select class="form-control interaction-header" id="income-level" onchange="updateIncomeChart()">
-								<option value="value10">$10,000</option>
-								<option value="value20">$20,000</option>
-								<option value="value30">$30,000</option>
-								<option value="value40">$40,000</option>
-								<option value="value50" selected="selected">$50,000</option>
-								<option value="value60">$60,000</option>
-								<option value="value70">$70,000</option>
-								<option value="value80">$80,000</option>
-								<option value="value90">$90,000</option>
-								<option value="value100">$100,000</option>
-							</select>
-						</div>
-					</form>
-					<br>
-					<br>
-					<h4 id="name" class="info-section-header">Weekly Targets (on UberX)</h4>
-					<table class="table table-striped">
-						<tbody>
-						<tr>
-							<th>Fare revenue ($)</th>
-							<td id="weekly-fare"></td>
-						</tr>
-						<tr>
-							<th>Number of trips</th>
-							<td id="weekly-trips"></td>
-						</tr>
-						<tr>
-							<th>Number of billed miles driven</th>
-							<td id="weekly-miles"></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-header">Who Do You Think Wins in the Sharing Economy?</div><br>
 			<div class="container">
-				<div class="row">
-					<div class="col-md-3 vote-icon"><img src="../static/img/uber-logo.jpg" class="img-icon"/></div>
-					<div class="col-md-3 vote-icon"><i class="fa fa-taxi"></i></div>
-					<div class="col-md-3 vote-icon"><i class="fa fa-female"></i></div>
-					<div class="col-md-3 vote-icon"><i class="fa fa-male"></i></div>
+				<div class="row story-bloc">
+					<div id="uber-order-description" class="story-text"></div>
 				</div>
-				<div class="row">
-					<div class="col-md-3 vote-label"><strong>Uber</strong><br><span>(New Sharing Economy Companies)</span></div>
-					<div class="col-md-3 vote-label"><strong>Taxis</strong><br><span>(Existing Old Economy Companies)</span></div>
-					<div class="col-md-3 vote-label"><strong>Tansaya</strong><br><span>(Consumers)</span></div>
-					<div class="col-md-3 vote-label"><strong>John</strong><br><span>(Workers)</span></div>
+				<div class="row story-bloc">
+					<div id="uber-dropoff-description" class="story-text"></div>
 				</div>
-				<div class="row">
-					<div class="col-md-3 vote-button">
-						<button class="btn btn-default" id="uber-button-win" onclick="">Win</button>
-						<button class="btn btn-default" id="uber-button-lose">Lose</button>
+				<div class="row story-bloc">
+					<div id="uber-decision-description" class="story-text"></div>
+				</div>
+				<div class="row story-bloc">
+					<i id="uber-order-icon" class="fa fa-female story-icon"></i>
+					<img src="static/img/car-icon.png" id="uber-pickup-icon" class="img-icon"/>
+					<img src="static/img/uber-logo.jpg" id="uber-logo-icon" class="img-icon"/>
+					<i id="uber-dropoff-icon" class="fa fa-male story-icon"></i>
+					<i id="uber-money-icon" class="fa fa-money story-icon"></i>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Worker's Decision: Drive for Uber?</div>
+			<div class="row">
+				<div class="col-md-3">
+					<h4 class="info-section-header" style="padding-left: 15px;">Annual Earnings Estimator</h4>
+					<div class="info-description" style="padding-left: 15px;">Select your target annual pre-tax income to see how much you'll need to drive with Uber and where the money goes.</div>
+					<div style="border-radius: 4px; padding: 30px 10px 30px 10px; display: inline-block; background-color: #09091a; margin-left: 150px; margin-top: 20px;">
+						<div id="income-slider"></div>
 					</div>
-					<div class="col-md-3 vote-button">
-						<button class="btn btn-default" id="taxi-button-win">Win</button>
-						<button class="btn btn-default" id="taxi-button-lose">Lose</button>
+					<div id="income-slider-label">$50,000</div>
+				</div>
+				<div class="col-md-9" style="padding-top: 40px;">
+					<div class="row">
+						<div class="col-md-12" style="padding-left: 22px;">
+							<div class="income-description" style="width: 199.7149278923165px;"><span style="background-color: #887bb4; color:white; padding: 2px;"><strong>Pre-Tax Income</strong></span><br>Remember you still need to pay for taxes and health insurance!</div>
+							<div class="income-description" style="width: 363.6675693633822px;"><span style="background-color: #67279b; color:white; padding: 2px;"><strong>Vehicle Operations Costs</strong></span><br>You will need to pay for fuel, insurance, repairs, maintenance, state fees, financing, and depreciation.</div>
+							<div class="income-description" style="width: 270.2742119166719px;"><span style="background-color: #4a0073; color:white; padding: 2px;"><strong>Uber Fees</strong></span><br>Uber takes a rider fee and also takes a 25% commission on the adjusted fare.</div>
+							<div class="income-description" style="width: 150px;"><span style="background-color: black; color:white; padding: 2px;"><strong>Total Revenue</strong></span><br>The fare revenue you have to earn!</div>
+						</div>
+						<div class="col-md-10">
+							<div id="driver-income-bar">
+							</div>
+						</div>
 					</div>
-					<div class="col-md-3 vote-button">
-						<button class="btn btn-default" id="consumer-button-win">Win</button>
-						<button class="btn btn-default" id="consumer-button-lose">Lose</button>
+					<div class="row">
+						<h4 class="info-section-header" id="driver-section-description"></h4>
 					</div>
-					<div class="col-md-3 vote-button">
-						<button class="btn btn-default" id="worker-button-win">Win</button>
-						<button class="btn btn-default" id="worker-button-lose">Lose</button>
+					<div class="row">
+						<div class="col-md-2" style="text-align: center;">
+							<h4 id="driver-hour-description" class="info-section-header" style="background-color: #09091a; color: white; padding: 5px;"></h4>
+							<div id="driver-hour-bar">
+							</div>
+						</div>
+						<div class="col-md-8" style="text-align: center;">
+							<h4 id="driver-map-description" class="info-section-header" style="background-color: #09091a; color: white; padding: 5px;"></h4>
+							<div id="driver-map">
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-3 vote-graph" id="uber-vote-chart"></div>
-					<div class="col-md-3 vote-graph" id="taxi-vote-chart"></div>
-					<div class="col-md-3 vote-graph" id="consumer-vote-chart"></div>
-					<div class="col-md-3 vote-graph" id="worker-vote-chart"></div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">Picking Winners and Losers</div>
+			<div class="container">
+				<div class="row story-bloc">
+					<div id="survey-description" class="story-text"></div>
+				</div>
+				<div id="survey-container" style="display: none;">
+					<div class="row">
+						<div class="col-md-3 vote-icon"><img src="static/img/uber-logo.jpg" class="img-icon" style="display: inline; position: relative;" /></div>
+						<div class="col-md-3 vote-icon">
+							<i class="fa fa-taxi story-icon" style="display: block; position: relative;"></i>
+						</div>
+						<div class="col-md-3 vote-icon">
+							<i class="fa fa-female story-icon" style="display: block; position: relative;"></i>
+						</div>
+						<div class="col-md-3 vote-icon">
+							<i class="fa fa-male story-icon" style="display: block; position: relative;"></i>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 vote-label"><strong>Uber</strong><br><span>(New Sharing Economy Companies)</span></div>
+						<div class="col-md-3 vote-label"><strong>Taxis</strong><br><span>(Existing Old Economy Companies)</span></div>
+						<div class="col-md-3 vote-label"><strong>Tansaya</strong><br><span>(Consumers)</span></div>
+						<div class="col-md-3 vote-label"><strong>John</strong><br><span>(Workers)</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 vote-button">
+							<button class="btn btn-default btn-win" id="uber-button-win">Win</button>
+							<button class="btn btn-default btn-lose" id="uber-button-lose">Lose</button>
+						</div>
+						<div class="col-md-3 vote-button">
+							<button class="btn btn-default btn-win" id="taxi-button-win">Win</button>
+							<button class="btn btn-default btn-lose" id="taxi-button-lose">Lose</button>
+						</div>
+						<div class="col-md-3 vote-button">
+							<button class="btn btn-default btn-win" id="consumer-button-win">Win</button>
+							<button class="btn btn-default btn-lose" id="consumer-button-lose">Lose</button>
+						</div>
+						<div class="col-md-3 vote-button">
+							<button class="btn btn-default btn-win" id="worker-button-win">Win</button>
+							<button class="btn btn-default btn-lose" id="worker-button-lose">Lose</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 vote-graph" id="uber-vote-chart"></div>
+						<div class="col-md-3 vote-graph" id="taxi-vote-chart"></div>
+						<div class="col-md-3 vote-graph" id="consumer-vote-chart"></div>
+						<div class="col-md-3 vote-graph" id="worker-vote-chart"></div>
+					</div>
 				</div>
 			</div>
 		</section>
 		<section class="section" id="section-lastpart">
-			<div class="col-md-6">
-				<h2 class="section-header" ><font color ="white">Project Info</font></h2>
-				<ol>
-					<font color ="white" size="4px"><li><strong>Authors</strong><font color ="white" size="4px">: Tansaya Kunaratskul, Jonathan Mazumdar, <a href="https://www.linkedin.com/in/ihsaanpatel/"><font color ="white" size="4px">Ihsaan Patel</a></font></li>
-					<li><font color ="white" size="4px">Project Resources</font>: <a href="https://github.com/pateli18/cs171sharingeconomy"><font color ="white" size="4px">Github</font></a><font color ="white" size="4px"> and <a href=""><font color ="white" size="4px">Process Book</a></font></li>
-				</ol>
-			</div>
-			<div class="col-md-6">
-				<h2 class="section-header"><font color ="white">References</font></h2>
-				<h4 style="text-decoration: underline;"><strong>Images</strong></h4>
-				<ol>
-					<li><strong><font color ="white" size="4px">Tile Banner</font></strong>: <a href="https://www.flickr.com/photos/kevingessner/3604506601/sizes/l">Taxis</a>,
-					<a href="https://www.flickr.com/photos/5chw4r7z/13449380733/sizes/l">Uber</a>,
-					<a href="https://www.flickr.com/photos/jeffbpictures/5852265423/sizes/l">Boston</a>,
-						<a href="https://www.flickr.com/photos/kaysha/4736796413/sizes/l">Driving Dashboard</a>
-					</li>
-					<li><font color ="white">Logos / Icons</font>: <a href="https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.4/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg">Uber Logo</a>, <a href="https://www.flaticon.com/free-icon/new-york-panoramic-buildings-silhouette_53137">NYC Icon</a></li>
-				</ol>
-				<h4 style="text-decoration: underline;"><strong><font color ="white">Data Sources</font></strong></h4>
-				<ol>
-					<li><font color ="white">Uber Timeline</font>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
-					<li><font color ="white">Consumer's Choice</font>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
-					<li><font color ="white">Driver's Decision</font>: <a href="http://uberestimate.com/prices/Boston/">Cost Assumptions and Public Pricing</a>, assumes no unpaid miles, and associated costs, between rides, which likely leads to overestimates of earnings.</li>
-					<li><font color ="white">Number of Rides and Vehicles in NYC:</font><a href="https://data.cityofnewyork.us/Transportation/Aggregate-ALLrideshares-rides/wd23-mvax">NYC Open Data</a></li>
-				</ol>
-			</div>
+			<div class="container">
+			<div class="row" style="margin-top: 150px; background-color: rgba(0, 0, 0, 0.6);">
+				<div class="col-md-6">
+					<h2 class="section-header" >Project Info</h2>
+					<ol>
+						<li><u>Authors</u>: Tansaya Kunaratskul, Jonathan Mazumdar, <a href="https://www.linkedin.com/in/ihsaanpatel/">Ihsaan Patel</a></li>
+						<li><u>Project Resources</u>: <a href="https://github.com/pateli18/cs171sharingeconomy">Github</a> and <a href="https://docs.google.com/document/d/1rwwb93sEI043NJfOcR7B075QbSn6iKpVWHLKsoplCx4/edit?usp=sharing">Process Book</a></li>
+					</ol>
+				</div>
+				<div class="col-md-6">
+					<h2 class="section-header">References</h2>
+					<h4><strong>Images</strong></h4>
+					<ol>
+						<li><u>Slide Backgrounds</u>: <a href="">Intro Slide</a>,
+						<a href="">End Slide</a>
+						</li>
+						<li><u>Logos / Icons</u>: <a href="https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.4/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg">Uber Logo</a>, <a href="https://www.flaticon.com/free-icon/new-york-panoramic-buildings-silhouette_53137">NYC Icon</a>,
+						<a href="https://www.flaticon.com/">Sharing Economy</a></li>
+					</ol>
+					<h4><strong>Data Sources</strong></h4>
+					<ol>
+						<li><u>Timeline</u>: <a href="https://en.wikipedia.org/wiki/Timeline_of_Uber">Events</a> </li>
+						<li><u>Driver's Dilemma</u>: <a href="https://data.cityofnewyork.us/Transportation/Aggregate-ALLrideshares-rides/wd23-mvax">NYC Open Data</a></li>
+						<li><u>Consumer's Choice</u>: <a href="http://bpdnews.com/taxi-rates">Taxi Pricing</a>, <a href="http://uberestimate.com/prices/Boston/">Uber Pricing</a>, and <a href="https://developer.uber.com/">Duration and Distance</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a></li>
+						<li><u>Driver's Decision</u>: <a href="http://uberestimate.com/prices/Boston/">Fare Information</a>, <a href="http://www.sherpashareblog.com/2016/02/uber-trips-are-becoming-longer-and-faster-but-are-they-more-profitable/">Trip Duration and Distance</a>,
+						<a href="https://melmagazine.com/how-much-can-you-earn-driving-uber-when-accounting-for-your-car-s-depreciation-ef66d8d3204b">Uber Commission and Cost per Mile</a>, <a href="https://www.ridesharingdriver.com/survey-data-how-much-uber-drivers-really-make-share/">Surge / Boosting</a>. Assumes 10% increase in fare revenue due to surging / boosters. Assumes no unpaid miles, and associated costs, between rides, which likely leads to overestimates of earnings.</li>
+					</ol>
+				</div>
+		</div>
+	</div>
 		</section>
 	</div>
 
 	<!-- Load JS libraries -->
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/jquery.fullpage.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/queue.min.js"></script>
-	<script src="../static/js/topojson.js"></script>
-	<script src="../static/js/d3.min.js"></script>
-	<script src="../static/js/d3-legend.min.js"></script>
-	<script src="../static/js/d3-scale-chromatic.min.js"></script>
-	<script src="../static/js/d3-tip.js"></script>
-	<script src="../static/js/leaflet.js"></script>
-	<script src="../static/js/colorbrewer.js"></script>
-	<script src="../static/js/jquery-ui.min.js"></script>
+	<script src="../static/js/libraries/jquery.min.js"></script>
+	<script src="../static/js/libraries/jquery.fullpage.min.js"></script>
+	<script src="../static/js/libraries/bootstrap.min.js"></script>
+	<script src="../static/js/libraries/queue.min.js"></script>
+	<script src="../static/js/libraries/topojson.js"></script>
+	<script src="../static/js/libraries/d3.min.js"></script>
+	<script src="../static/js/libraries/d3-legend.min.js"></script>
+	<script src="../static/js/libraries/d3-tip.js"></script>
+	<script src="../static/js/libraries/leaflet.js"></script>
+	<script src="../static/js/libraries/jquery-ui.min.js"></script>
 
 	<!-- Handlers and visualizations -->
 	<script src="../static/js/main.js"></script>
-	<script src="../static/js/handler-storyslides.js"></script>
-	<script src="../static/js/handler-timelineslide.js"></script>
-	<script src="../static/js/vis-timeline.js"></script>
-	<script src="../static/js/handler-rideslide.js"></script>
-	<script src="../static/js/vis-rideline.js"></script>
-	<script src="../static/js/vis-ridesperdriver.js"></script>
-	<script src="../static/js/handler-relativevalueslide.js"></script>
-	<script src="../static/js/vis-relativevaluemap.js"></script>
-	<script src="../static/js/vis-relativevaluescatter.js"></script>
-	<script src="../static/js/handler-driverincomeslide.js"></script>
-	<script src="../static/js/vis-driverincomebar.js"></script>
-	<script src="../static/js/handler-voteslide.js"></script>
-	<script src="../static/js/vis-votesbar.js"></script>
+
+	<script src="../static/js/handlers/handler-timelineslide.js"></script>
+	<script src="../static/js/visualizations/vis-timeline.js"></script>
+
+	<script src="../static/js/handlers/handler-rideslide.js"></script>
+	<script src="../static/js/visualizations/vis-rideline.js"></script>
+	<script src="../static/js/visualizations/vis-ridesperdriver.js"></script>
+
+	<script src="../static/js/handlers/handler-relativevalueslide.js"></script>
+	<script src="../static/js/visualizations/vis-relativevaluemap.js"></script>
+	<script src="../static/js/visualizations/vis-relativevaluescatter.js"></script>
+
+	<script src="../static/js/handlers/handler-driverincomeslide.js"></script>
+	<script src="../static/js/visualizations/vis-driverincomebar.js"></script>
+	<script src="../static/js/visualizations/vis-driverhoursbar.js"></script>
+	<script src="../static/js/visualizations/vis-drivermap.js"></script>
+	
+	<script src="../static/js/handlers/handler-voteslide.js"></script>
+	<script src="../static/js/visualizations/vis-votesbar.js"></script>
 
 	<script>
 		initializeElements();
