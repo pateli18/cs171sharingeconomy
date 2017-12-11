@@ -280,3 +280,7 @@ select {
 #fp-nav ul li a span {
     background: white;
 }
+
+.leaflet-control-attribution.leaflet-control {
+    display: none;
+}

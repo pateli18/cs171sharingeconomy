@@ -21,7 +21,10 @@ HoursBar.prototype.initVis = function() {
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     vis.yScale = d3.scaleLinear()
-    			.range([vis.height, 0]);
+    			.range([vis.height, 0])
+                .domain([0, d3.max(vis.data, function(d) {
+                    return d.WeeklyHours;
+                })]);
 
     vis.svg.append('text')
     	.attr('y', vis.height + 15)
@@ -40,7 +43,7 @@ HoursBar.prototype.wrangleData = function() {
         return d.PreTaxIncome === incomeValue;
     });
 
-    vis.yScale.domain([0, Math.max(vis.displayData[0].WeeklyHours, 40)]);
+    //vis.yScale.domain([0, Math.max(vis.displayData[0].WeeklyHours, 40)]);
 
     vis.updateChart();
 }

@@ -33,7 +33,7 @@ $(function() {
                         setTimeout(function() {moveItem('sharing-economy-uber-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var uberIntroText = 'Uber is the largest of these software platforms.';
+                        var uberIntroText = "Uber is the largest of these software platforms. This site visualizes Uber's and by extension the Sharing Economy's rise and its effects on key stakeholders - taxi cabs, customers, and drivers.";
                         setTimeout(function() {typeText('uber-introduction', uberIntroText); }, timeDelay);
     
                     }
@@ -146,7 +146,7 @@ $(function() {
                     if (slideRun[index]) {
                         slideRun[index] = false;
                         var timeDelay = basePause;
-                        var surveyText = 'As you can see, there are those who benefit ("Win") and suffer ("Lose") from the rise of the sharing economy. Who do you think are the winners and losers of the Sharing Economy? Vote below and see how your votes compare to everyone elses!'
+                        var surveyText = 'As you can see, value created through the rise of the sharing economy appears unevenly distributed. Some stakeholders are positioned to gain more than others, while some may be left worse off than they were before. Who do you think are the winners and losers of the sharing economy? Vote below and see how your votes compare to everyone elses!'
                         setTimeout(function() {typeText('survey-description', surveyText); }, timeDelay);
 
                         timeDelay += basePause + surveyText.length * textTypeInterval;
