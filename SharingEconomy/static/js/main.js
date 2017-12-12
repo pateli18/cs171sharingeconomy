@@ -1,5 +1,5 @@
 
-var textTypeInterval = 50;
+var textTypeInterval = 40;
 var basePause = 1000;
 var slideRun = {2:true, 3:true, 4:true, 5:true, 6:true, 8:true, 10:true};
 
@@ -20,12 +20,6 @@ var uberDropoffText = 'After dropping Tansaya off at the airport, Jonathan recei
 var uberDecisionText = 'He wants to figure out if he should keep driving for Uber or look for a different job.';
 
 var surveyText = 'As you can see, value created through the rise of the sharing economy appears unevenly distributed. Some stakeholders are positioned to gain more than others, while some may be left worse off than they were before. Who do you think are the winners and losers of the sharing economy? Vote below and see how your votes compare to everyone elses!';
-
-var slideInfo = {2:[{text: sharingEconomyText, id: 'sharing-economy-description'},{text: rideSharingText, id: 'ride-sharing-description'},{text: uberIntroText, id: 'uber-introduction'}],
-4:[{text:driverDecisionText, id:'driver-decision-description'},{text:driverCarText, id:'driver-car-description'},{text:driverNycText, id:'driver-nyc-description'}],
-6:[{text:consumerDecisionText, id:'consumer-decision-description'},{text:consumerQuestionText, id:'consumer-question-description'},{text:consumerMoneyText, id:'consumer-money-description'}],
-8:[{text:uberOrderText, id:'uber-order-description'}, {text:uberDropoffText, id:'uber-dropoff-description'}, {text:uberDecisionText, id:'uber-decision-description'}],
-10:[{text:surveyText, id:'survey-description'}]};
 
 $(function() {
     $('#fullPage')
@@ -57,10 +51,6 @@ $(function() {
                         setTimeout(function() {typeText('uber-introduction', uberIntroText); }, timeDelay);
 
                         slideRun[index] = false;
-                    } else {
-                        slideInfo[index].forEach(function(d) {
-                            $('#' + d.id).html(d.text);
-                        });
                     }
 
                 }
@@ -93,10 +83,6 @@ $(function() {
                         setTimeout(function() {typeText('driver-nyc-description', driverNycText); }, timeDelay);
 
                         slideRun[index] = false;
-                    } else {
-                        slideInfo[index].forEach(function(d) {
-                            $('#' + d.id).html(d.text);
-                        });
                     }
                 }
 
@@ -129,10 +115,6 @@ $(function() {
                         setTimeout(function() {typeText('consumer-money-description', consumerMoneyText); }, timeDelay);
 
                         slideRun[index] = false;
-                    } else {
-                        slideInfo[index].forEach(function(d) {
-                            $('#' + d.id).html(d.text);
-                        });
                     }
                 }
 
@@ -167,10 +149,6 @@ $(function() {
 
                         slideRun[index] = false;
 
-                    } else {
-                        slideInfo[index].forEach(function(d) {
-                            $('#' + d.id).html(d.text);
-                        });
                     }
                 }
 
@@ -186,10 +164,6 @@ $(function() {
                         }, timeDelay);
 
                         slideRun[index] = false;
-                    } else {
-                        slideInfo[index].forEach(function(d) {
-                            $('#' + d.id).html(d.text);
-                        });
                     }
                 }
 
@@ -219,16 +193,17 @@ function typeText(elementId, sentence) {
 
     var textBloc = document.getElementById(elementId);
     textBloc.innerHTML = "";
-    i = 0;
+    var i = 0;
 
-    var typeSentence = setInterval(function() {
-        textBloc.innerHTML += sentence.charAt(i);
-        i ++;
-        if (i >= sentence.length) {
-            clearInterval(typeSentence);
+    function typeWriter() {
+        if (i < sentence.length) {
+            document.getElementById(elementId).innerHTML += sentence.charAt(i);
+            i++;
+            setTimeout(typeWriter, textTypeInterval);
         }
-    }, textTypeInterval);
+    }
 
+    typeWriter();
 }
 
 function moveItem(elementId, startPosition, endPosition, timeInterval) {
