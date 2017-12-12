@@ -4,3 +4,4 @@ env/
 helper_functions
 __pycache__
 .DS_Store
+submission/

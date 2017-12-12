@@ -3,6 +3,30 @@ var textTypeInterval = 50;
 var basePause = 1000;
 var slideRun = {2:true, 3:true, 4:true, 5:true, 6:true, 8:true, 10:true};
 
+var sharingEconomyText = 'The Sharing Economy is a new economic model where people earn money by allowing other people to use their underutilized assets (cars, rooms, etc.).';
+var rideSharingText = 'Ride Sharing is the largest subsector of the Sharing Economy and involves software platforms matching those people who have cars to those people who need rides.';
+var uberIntroText = "Uber is the largest of these software platforms. This site visualizes Uber's and by extension the Sharing Economy's rise and its effects on key stakeholders - taxi cabs, customers, and drivers.";
+
+var driverDecisionText = 'Jonathan recently lost his job and is looking for work.';
+var driverCarText = 'He wonders if he should work for a taxi company or use his own car to drive for Uber or another ride-sharing service.';
+var driverNycText = 'He takes a closer look at the largest taxi market in the US, New York City.';
+
+var consumerDecisionText = 'Tansaya is a student at Harvard University.';
+var consumerQuestionText = 'She needs to get to the airport and is deciding whether to take an Uber or taxi.';
+var consumerMoneyText = 'She examines the prices to help make a decision.';
+
+var uberOrderText = 'Tansaya decides to order an Uber and is picked up by Jonathan.';
+var uberDropoffText = 'After dropping Tansaya off at the airport, Jonathan receives his first payment from Uber.';
+var uberDecisionText = 'He wants to figure out if he should keep driving for Uber or look for a different job.';
+
+var surveyText = 'As you can see, value created through the rise of the sharing economy appears unevenly distributed. Some stakeholders are positioned to gain more than others, while some may be left worse off than they were before. Who do you think are the winners and losers of the sharing economy? Vote below and see how your votes compare to everyone elses!';
+
+var slideInfo = {2:[{text: sharingEconomyText, id: 'sharing-economy-description'},{text: rideSharingText, id: 'ride-sharing-description'},{text: uberIntroText, id: 'uber-introduction'}],
+4:[{text:driverDecisionText, id:'driver-decision-description'},{text:driverCarText, id:'driver-car-description'},{text:driverNycText, id:'driver-nyc-description'}],
+6:[{text:consumerDecisionText, id:'consumer-decision-description'},{text:consumerQuestionText, id:'consumer-question-description'},{text:consumerMoneyText, id:'consumer-money-description'}],
+8:[{text:uberOrderText, id:'uber-order-description'}, {text:uberDropoffText, id:'uber-dropoff-description'}, {text:uberDecisionText, id:'uber-decision-description'}],
+10:[{text:surveyText, id:'survey-description'}]};
+
 $(function() {
     $('#fullPage')
         .fullpage({
@@ -14,28 +38,29 @@ $(function() {
             afterLoad: function(anchorLink, index) {
                 if (index == 2) {
                     if (slideRun[index]) {
-                        slideRun[index] = false;
                         var timeDelay = basePause;
                         setTimeout(function() {moveItem('sharing-economy-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var sharingEconomyText = 'The Sharing Economy is a new economic model where people earn money by allowing other people to use their underutilized assets (cars, rooms, etc.).';
                         setTimeout(function() {typeText('sharing-economy-description', sharingEconomyText); }, timeDelay);
 
                         timeDelay += basePause + sharingEconomyText.length * textTypeInterval;
                         setTimeout(function() {moveItem('sharing-economy-car-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var rideSharingText = 'Ride Sharing is the largest subsector of the Sharing Economy and involves software platforms matching those people who have cars to those people who need rides.';
                         setTimeout(function() {typeText('ride-sharing-description', rideSharingText); }, timeDelay);
 
                         timeDelay += basePause + rideSharingText.length * textTypeInterval;
                         setTimeout(function() {moveItem('sharing-economy-uber-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var uberIntroText = "Uber is the largest of these software platforms. This site visualizes Uber's and by extension the Sharing Economy's rise and its effects on key stakeholders - taxi cabs, customers, and drivers.";
                         setTimeout(function() {typeText('uber-introduction', uberIntroText); }, timeDelay);
-    
+
+                        slideRun[index] = false;
+                    } else {
+                        slideInfo[index].forEach(function(d) {
+                            $('#' + d.id).html(d.text);
+                        });
                     }
 
                 }
@@ -49,27 +74,29 @@ $(function() {
 
                 if (index == 4) {
                     if (slideRun[index]) {
-                        slideRun[index] = false;
                         var timeDelay = basePause;
                         setTimeout(function() {moveItem('driver-decision-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var driverDecisionText = 'Jonathan recently lost his job and is looking for work.';
                         setTimeout(function() {typeText('driver-decision-description', driverDecisionText); }, timeDelay);
 
                         timeDelay += basePause + driverDecisionText.length * textTypeInterval;
                         setTimeout(function() {moveItem('driver-car-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var driverCarText = 'He wonders if he should work for a taxi company or use his own car to drive for Uber or another ride-sharing service.';
                         setTimeout(function() {typeText('driver-car-description', driverCarText); }, timeDelay);
 
                         timeDelay += basePause + driverCarText.length * textTypeInterval;
                         setTimeout(function() {moveItem('driver-nyc-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var driverNycText = 'He takes a closer look at the largest taxi market in the US, New York City.';
                         setTimeout(function() {typeText('driver-nyc-description', driverNycText); }, timeDelay);
+
+                        slideRun[index] = false;
+                    } else {
+                        slideInfo[index].forEach(function(d) {
+                            $('#' + d.id).html(d.text);
+                        });
                     }
                 }
 
@@ -82,35 +109,37 @@ $(function() {
 
                 if (index == 6) {
                     if (slideRun[index]) {
-                        slideRun[index] = false;
+                        
                         var timeDelay = basePause;
                         setTimeout(function() {moveItem('consumer-decision-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var consumerDecisionText = 'Tansaya is a student at Harvard University.';
                         setTimeout(function() {typeText('consumer-decision-description', consumerDecisionText); }, timeDelay);
 
                         timeDelay += basePause + consumerDecisionText.length * textTypeInterval;
                         setTimeout(function() {moveItem('consumer-question-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var consumerQuestionText = 'She needs to get to the airport and is deciding whether to take an Uber or taxi.';
                         setTimeout(function() {typeText('consumer-question-description', consumerQuestionText); }, timeDelay);
 
                         timeDelay += basePause + consumerQuestionText.length * textTypeInterval;
                         setTimeout(function() {moveItem('consumer-money-icon', 0, 50, 100)}, timeDelay);
 
                         timeDelay += 500;
-                        var consumerMoneyText = 'She examines the prices to help make a decision.';
                         setTimeout(function() {typeText('consumer-money-description', consumerMoneyText); }, timeDelay);
+
+                        slideRun[index] = false;
+                    } else {
+                        slideInfo[index].forEach(function(d) {
+                            $('#' + d.id).html(d.text);
+                        });
                     }
                 }
 
                 if (index == 8) {
                     if (slideRun[index]) {
-                        slideRun[index] = false;
+            
                         var timeDelay = basePause;
-                        var uberOrderText = 'Tansaya decides to order an Uber and is picked up by Jonathan.'
                         setTimeout(function() {typeText('uber-order-description', uberOrderText); }, timeDelay);
                         setTimeout(function() {moveItem('uber-order-icon', 400, 400, 0)}, timeDelay + 100);
 
@@ -126,7 +155,6 @@ $(function() {
                         setTimeout(function() {moveItem('uber-pickup-icon', 400, 2000, 800)}, timeDelay);
 
                         timeDelay += 3000;
-                        var uberDropoffText = 'After dropping Tansaya off at the airport, Jonathan receives his first payment from Uber.';
                         setTimeout(function() {typeText('uber-dropoff-description', uberDropoffText); }, timeDelay);
                         setTimeout(function() {moveItem('uber-logo-icon', 400, 400, 0)}, timeDelay + 100);
                         setTimeout(function() {moveItem('uber-dropoff-icon', 800, 800, 0)}, timeDelay + 100);
@@ -135,18 +163,20 @@ $(function() {
                         setTimeout(function() {moveItem('uber-money-icon', 400, 700, 200)}, timeDelay);
 
                         timeDelay += basePause;
-                        var uberDecisionText = 'He wants to figure out if he should keep driving for Uber or look for a different job.';
                         setTimeout(function() {typeText('uber-decision-description', uberDecisionText); }, timeDelay);
 
+                        slideRun[index] = false;
 
+                    } else {
+                        slideInfo[index].forEach(function(d) {
+                            $('#' + d.id).html(d.text);
+                        });
                     }
                 }
 
                 if (index == 10) {
                     if (slideRun[index]) {
-                        slideRun[index] = false;
                         var timeDelay = basePause;
-                        var surveyText = 'As you can see, value created through the rise of the sharing economy appears unevenly distributed. Some stakeholders are positioned to gain more than others, while some may be left worse off than they were before. Who do you think are the winners and losers of the sharing economy? Vote below and see how your votes compare to everyone elses!'
                         setTimeout(function() {typeText('survey-description', surveyText); }, timeDelay);
 
                         timeDelay += basePause + surveyText.length * textTypeInterval;
@@ -154,6 +184,12 @@ $(function() {
                             $('#survey-container').show();
                             initializeVoteCharts();
                         }, timeDelay);
+
+                        slideRun[index] = false;
+                    } else {
+                        slideInfo[index].forEach(function(d) {
+                            $('#' + d.id).html(d.text);
+                        });
                     }
                 }
 
@@ -173,6 +209,7 @@ $(function() {
                 if (index === 3) {
                     timeline_reset_button_click();
                 }
+
             }
 
         });

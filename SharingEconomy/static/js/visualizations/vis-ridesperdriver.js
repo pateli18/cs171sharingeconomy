@@ -67,6 +67,7 @@ DriverVis.prototype.wrangleData = function() {
 
     vis.displayData = [];
 
+    totalCount += 1;
     for (var i = 0; i <= 5; i++) {
         for (var j = 0; j <= 5; j++) {
             amount = Math.max(Math.min(totalCount - 1, 1), 0);
