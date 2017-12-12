@@ -33,8 +33,8 @@ IncomeChart.prototype.initVis = function() {
         .ticks(5);
 
     vis.colorScale = d3.scaleOrdinal()
-            .range(["#dddddd","#887bb4","#67279b","#4a0073","#4a0073"])
-            .domain(["TotalRevenue", "PreTaxIncome","OperationCosts","UberFeesAndCommission"]);
+            .range(["#dddddd","#887bb4","#67279b","#4a0073"])
+            .domain(["TotalRevenue", "PreTaxIncome","OperationCosts","UberFeesAndCommissions"]);
 
     vis.svg.append("g")
         .attr("class", "x-axis")
@@ -67,6 +67,12 @@ IncomeChart.prototype.wrangleData = function() {
 
     vis.displayData.sort(function(a, b) {
         return b.index - a.index;
+    });
+
+    vis.displayData.forEach(function(d) {
+        if (d.key != 'TotalRevenue') {
+            $('#' + d.key).width(vis.xScale(d[0][1] - d[0][0]) - 10);
+        }
     });
 
     vis.updateChart();
